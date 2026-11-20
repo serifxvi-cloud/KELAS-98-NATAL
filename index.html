@@ -893,13 +893,28 @@ let lbIdx=0,lbZ;
 /* plans */
 $$('[data-sub]').forEach(b=>b.addEventListener('click',e=>{toast('🎉 Subscribed to '+b.dataset.sub+'! No credit card, just good vibes.');pop(e.clientX,e.clientY)}));
 
-/* ============ music (We Wish You a Merry Christmas — public domain) ============ */
-(function(){const N={D4:293.66,E4:329.63,F4:369.99,G4:392,A4:440,B4:493.88,C5:523.25,D5:587.33,R:0};
- const M=[['D4',1],['G4',1],['G4',.5],['A4',.5],['G4',.5],['F4',.5],['E4',1],['E4',1],['E4',1],['A4',1],['A4',.5],['B4',.5],['A4',.5],['G4',.5],['F4',1],['D4',1],['D4',1],['B4',1],['B4',.5],['C5',.5],['B4',.5],['A4',.5],['G4',1],['E4',1],['D4',.5],['D4',.5],['E4',1],['A4',1],['F4',1],['G4',2],['R',1],['D4',1]].map(([n,b])=>[N[n],b]);
- let ctx,playing=false,i=0,t,beat=.4;
- function note(f,d){const o=ctx.createOscillator(),g=ctx.createGain(),o2=ctx.createOscillator();o.type='triangle';o2.type='sine';o.frequency.value=f;o2.frequency.value=f*2;const g2=ctx.createGain();g2.gain.value=.25;o.connect(g);o2.connect(g2);g2.connect(g);g.connect(ctx.destination);const n=ctx.currentTime;g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.1,n+.02);g.gain.exponentialRampToValueAtTime(.001,n+d*.95);o.start(n);o2.start(n);o.stop(n+d);o2.stop(n+d)}
- function step(){if(!playing)return;const[f,b]=M[i%M.length];if(f)note(f,b*beat);i++;t=setTimeout(step,b*beat*1000)}
- $('#musicBtn').onclick=e=>{const b=e.currentTarget;if(!playing){ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();ctx.resume();playing=true;step();toast('🎵 We wish you a Merry Christmas!')}else{playing=false;clearTimeout(t)}b.setAttribute('aria-pressed',playing)}})();
+/* ============ music: Wham! — Last Christmas (official YouTube embed) ============ */
+(function(){
+ let playing=false, player=null;
+ const btn=$('#musicBtn');
+ function stop(){if(player){player.remove();player=null}playing=false;btn.setAttribute('aria-pressed','false');btn.textContent='🎵 Music'}
+ function start(){
+  player=document.createElement('div');
+  player.id='lastChristmasPlayer';
+  player.style.cssText='position:fixed;right:18px;bottom:18px;width:min(320px,calc(100vw - 36px));aspect-ratio:16/9;z-index:9999;border:1px solid rgba(255,255,255,.35);border-radius:16px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,.35);background:#111';
+  const frame=document.createElement('iframe');
+  frame.src='https://www.youtube-nocookie.com/embed/E8gmARGvPlI?autoplay=1&playsinline=1&rel=0';
+  frame.title='Wham! — Last Christmas (Official Video)';
+  frame.allow='autoplay; encrypted-media; picture-in-picture; web-share';
+  frame.referrerPolicy='strict-origin-when-cross-origin';
+  frame.allowFullscreen=true;
+  frame.style.cssText='width:100%;height:100%;border:0;display:block';
+  player.appendChild(frame);document.body.appendChild(player);
+  playing=true;btn.setAttribute('aria-pressed','true');btn.textContent='⏸ Stop music';
+  toast('🎄 Playing Last Christmas by Wham!');
+ }
+ btn.onclick=()=>playing?stop():start();
+})();
 
 /* ============ hero framed photo ============ */
 (function(){const img=$('#heroPhoto'),fr=$('#heroFrame'),bl=$('#frameBulbs');img.src=CLASS_PHOTO;
