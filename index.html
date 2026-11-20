@@ -893,7 +893,7 @@ let lbIdx=0,lbZ;
 /* plans */
 $$('[data-sub]').forEach(b=>b.addEventListener('click',e=>{toast('🎉 Subscribed to '+b.dataset.sub+'! No credit card, just good vibes.');pop(e.clientX,e.clientY)}));
 
-/* ============ music: Wham! — Last Christmas ============ */
+/* ============ music: Wham! — Last Christmas (audio-only Spotify player) ============ */
 (function(){
  let playing=false, player=null;
  const btn=$('#musicBtn');
@@ -905,25 +905,33 @@ $$('[data-sub]').forEach(b=>b.addEventListener('click',e=>{toast('🎉 Subscribe
   if(player)player.remove();
   player=document.createElement('section');
   player.id='lastChristmasPlayer';
-  player.setAttribute('aria-label','Wham! Last Christmas music player');
-  player.style.cssText='position:fixed;right:18px;bottom:18px;width:min(420px,calc(100vw - 28px));z-index:100000;background:#101c2a;color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:18px;overflow:hidden;box-shadow:0 14px 48px rgba(0,0,0,.5);font:600 13px system-ui';
+  player.setAttribute('aria-label','Wham! Last Christmas audio player');
+  player.style.cssText='position:fixed;right:18px;bottom:18px;width:min(360px,calc(100vw - 28px));z-index:100000;background:rgba(17,29,43,.97);color:#fff;border:1px solid rgba(255,255,255,.32);border-radius:18px;overflow:hidden;box-shadow:0 14px 48px rgba(0,0,0,.42);font:600 13px system-ui';
   const top=document.createElement('div');
   top.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px';
-  const label=document.createElement('span');label.textContent='🎄 WHAM! — LAST CHRISTMAS';
+  const label=document.createElement('span');label.textContent='🎄 NOW PLAYING · WHAM!';label.style.cssText='letter-spacing:.08em;font-size:11px';
   const close=document.createElement('button');close.type='button';close.textContent='✕';close.setAttribute('aria-label','Close music player');close.style.cssText='border:0;background:transparent;color:white;font-size:20px;cursor:pointer;padding:2px 7px';
   close.onclick=stop;top.append(label,close);
+  const song=document.createElement('div');
+  song.style.cssText='display:flex;align-items:center;gap:12px;padding:0 13px 10px';
+  const art=document.createElement('div');
+  art.textContent='❄️';art.style.cssText='width:48px;height:48px;flex:0 0 48px;border-radius:9px;background:linear-gradient(135deg,#b51f38,#183d58);display:grid;place-items:center;font-size:25px';
+  const meta=document.createElement('div');
+  const title=document.createElement('div');title.textContent='Last Christmas';title.style.cssText='font-size:15px;font-weight:750';
+  const artist=document.createElement('div');artist.textContent='Wham! · 1984';artist.style.cssText='font-size:12px;opacity:.72;margin-top:3px';
+  meta.append(title,artist);song.append(art,meta);
   const frame=document.createElement('iframe');
-  frame.title='Wham! — Last Christmas (Official Music Video)';
-  frame.allow='autoplay; encrypted-media; picture-in-picture; web-share';
-  frame.referrerPolicy='strict-origin-when-cross-origin';frame.allowFullscreen=true;
-  frame.style.cssText='width:100%;aspect-ratio:16/9;border:0;display:block;background:#000';
-  frame.src='https://www.youtube-nocookie.com/embed/E8gmARGvPlI?autoplay=1&controls=1&playsinline=1&rel=0';
+  frame.title='Listen to Last Christmas by Wham! on Spotify';
+  frame.src='https://open.spotify.com/embed/track/2FRnf9qhLbvw8fu4IBXx78?utm_source=generator&theme=0';
+  frame.width='100%';frame.height='152';frame.style.cssText='display:block;border:0;background:transparent';
+  frame.allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+  frame.loading='eager';
   const fallback=document.createElement('a');
-  fallback.href='https://www.youtube.com/watch?v=E8gmARGvPlI';fallback.target='_blank';fallback.rel='noopener noreferrer';
-  fallback.textContent='▶ If it does not start here, play Last Christmas on YouTube ↗';
-  fallback.style.cssText='display:block;padding:11px 13px;color:#d8efff;text-decoration:none;font:600 12px system-ui;background:#17283a';
-  player.append(top,frame,fallback);document.body.appendChild(player);
-  playing=true;btn.setAttribute('aria-pressed','true');btn.textContent='⏸ Stop Last Christmas';
+  fallback.href='https://open.spotify.com/track/2FRnf9qhLbvw8fu4IBXx78';fallback.target='_blank';fallback.rel='noopener noreferrer';
+  fallback.textContent='Open song in Spotify ↗';
+  fallback.style.cssText='display:block;padding:9px 13px;color:#d8efff;text-decoration:none;font:600 12px system-ui;background:rgba(255,255,255,.06)';
+  player.append(top,song,frame,fallback);document.body.appendChild(player);
+  playing=true;btn.setAttribute('aria-pressed','true');btn.textContent='⏸ Close music player';
  }
  btn.textContent='🎵 Play Last Christmas';
  btn.onclick=()=>playing?stop():start();
