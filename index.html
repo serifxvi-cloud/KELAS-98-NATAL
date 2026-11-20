@@ -313,6 +313,19 @@ body.intro .hero-content{visibility:hidden;animation:unhide 0s linear 12s forwar
 #village .viewer{border:1px solid rgba(225,239,255,.42);box-shadow:0 0 0 7px rgba(205,224,255,.045),0 0 70px rgba(139,171,255,.22)}
 #village #vsvg{filter:saturate(1.13) contrast(1.03)}
 #village #villageLights .bulb{animation:festiveGlow 1.8s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+#village #aurora{animation:auroraDrift 18s ease-in-out infinite alternate;transform-origin:center}
+@keyframes auroraDrift{from{transform:translateX(-22px) skewY(-1deg);opacity:.2}to{transform:translateX(24px) skewY(1deg);opacity:.52}}
+#village #villageWalkers .walker{transform-box:fill-box;transform-origin:center bottom;animation:villagerWalk 3.2s ease-in-out var(--delay,0s) infinite}
+@keyframes villagerWalk{0%,100%{transform:translateY(0) rotate(-1deg)}25%{transform:translateY(-3px) rotate(1deg)}50%{transform:translateY(0) rotate(-1deg)}75%{transform:translateY(-2px) rotate(1deg)}}
+#village #lampPosts{filter:drop-shadow(0 0 9px rgba(255,213,130,.4))}
+#village #distantHomes{filter:drop-shadow(0 0 13px rgba(255,205,125,.2))}
+#village #villageSparkles{animation:sparklePulse 3s ease-in-out infinite alternate}
+@keyframes sparklePulse{from{opacity:.35}to{opacity:1}}
+#village .viewer{background:linear-gradient(145deg,#172451,#9e91c5 70%,#eff5ff)}
+#village .viewer-shell{position:relative}
+#village .viewer-shell:after{content:"";position:absolute;inset:-18px;border-radius:30px;background:radial-gradient(ellipse,rgba(151,186,255,.12),transparent 68%);pointer-events:none;z-index:-1}
+@media(prefers-reduced-motion:reduce){#village #aurora,#village #villageWalkers .walker,#village #villageSparkles{animation:none!important}}
+
 @keyframes festiveGlow{from{opacity:.55;filter:drop-shadow(0 0 3px currentColor)}to{opacity:1;filter:drop-shadow(0 0 13px currentColor)}}
 #village #villageCrowd .bob{transform-box:fill-box;transform-origin:center bottom}
 #village #villageSnow circle{animation:flurry 7s linear infinite}
@@ -530,6 +543,8 @@ body.intro .hero-content{visibility:hidden;animation:unhide 0s linear 12s forwar
        <linearGradient id="vsnow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6faff"/><stop offset="1" stop-color="#bfd2fa"/></linearGradient>
        <radialGradient id="moonGlow"><stop offset="0" stop-color="#fff6d6" stop-opacity=".5"/><stop offset="1" stop-color="#fff6d6" stop-opacity="0"/></radialGradient>
        <radialGradient id="lampGlow"><stop offset="0" stop-color="#ffd166" stop-opacity=".55"/><stop offset="1" stop-color="#ffd166" stop-opacity="0"/></radialGradient>
+       <filter id="auroraBlur" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
+       <filter id="lampBlur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="4"/></filter>
       </defs>
       <rect width="1200" height="700" fill="url(#vsky)"/>
       <g id="vStars"></g>
@@ -612,6 +627,43 @@ body.intro .hero-content{visibility:hidden;animation:unhide 0s linear 12s forwar
        </g>
       </g>
       <g id="villageSnow" fill="#fff" opacity=".85"></g>
+      <!-- Aurora ribbons and a richer dreamy night sky -->
+      <g id="aurora" opacity=".38" filter="url(#auroraBlur)">
+       <path d="M-80 150 Q190 -5 430 115 T920 70 T1290 120" fill="none" stroke="#65f2d0" stroke-width="38"/>
+       <path d="M-80 185 Q180 25 470 145 T930 100 T1290 150" fill="none" stroke="#8b9dff" stroke-width="22"/>
+       <path d="M80 205 Q310 70 560 175 T1040 125" fill="none" stroke="#e6a8ff" stroke-width="11"/>
+      </g>
+      <!-- distant alpine homes, lit from within -->
+      <g id="distantHomes" opacity=".9">
+       <g transform="translate(370 365) scale(.55)"><path d="M0 80L90 8 180 80Z" fill="#34456f"/><path d="M-8 82Q90 65 188 82L180 96H0Z" fill="#fff"/><rect x="18" y="78" width="144" height="92" fill="#73506b"/><rect x="35" y="100" width="35" height="40" fill="#ffd98a" stroke="#fff" stroke-width="4"/><rect x="110" y="100" width="35" height="40" fill="#ffd98a" stroke="#fff" stroke-width="4"/><rect x="80" y="125" width="25" height="45" fill="#382d4e"/></g>
+       <g transform="translate(530 390) scale(.43)"><path d="M0 80L90 8 180 80Z" fill="#354b78"/><path d="M-8 82Q90 65 188 82L180 96H0Z" fill="#fff"/><rect x="18" y="78" width="144" height="92" fill="#8a4e45"/><rect x="35" y="100" width="35" height="40" fill="#ffe1a0" stroke="#fff" stroke-width="4"/><rect x="110" y="100" width="35" height="40" fill="#ffe1a0" stroke="#fff" stroke-width="4"/></g>
+       <g transform="translate(1090 360) scale(.48)"><path d="M0 80L90 8 180 80Z" fill="#34456f"/><path d="M-8 82Q90 65 188 82L180 96H0Z" fill="#fff"/><rect x="18" y="78" width="144" height="92" fill="#76516b"/><rect x="35" y="100" width="35" height="40" fill="#ffd98a" stroke="#fff" stroke-width="4"/><rect x="110" y="100" width="35" height="40" fill="#ffd98a" stroke="#fff" stroke-width="4"/></g>
+      </g>
+      <!-- a winding snowy lane leading into the village -->
+      <path d="M515 700 Q570 620 520 575 Q470 530 540 490 Q630 445 610 400" fill="none" stroke="#fff" stroke-width="62" opacity=".45" stroke-linecap="round"/>
+      <path d="M515 700 Q570 620 520 575 Q470 530 540 490 Q630 445 610 400" fill="none" stroke="#dce8ff" stroke-width="42" opacity=".62" stroke-linecap="round"/>
+      <g id="footprints" fill="#a8bce9" opacity=".55"><ellipse cx="495" cy="665" rx="3" ry="7" transform="rotate(-22 495 665)"/><ellipse cx="526" cy="642" rx="3" ry="7" transform="rotate(18 526 642)"/><ellipse cx="507" cy="618" rx="3" ry="7"/><ellipse cx="532" cy="593" rx="3" ry="7"/><ellipse cx="508" cy="568" rx="3" ry="7"/></g>
+      <!-- Extra villagers strolling, greeting neighbours and carrying parcels -->
+      <g id="villageWalkers">
+       <g class="walker" style="--delay:-1s"><use href="#kid" x="445" y="515" width="42" height="78" style="color:#d85b70;--hat:#ffd166;--skin:#e6b58e"/></g>
+       <g class="walker" style="--delay:-2.4s"><use href="#kid" x="485" y="525" width="40" height="74" style="color:#4d91c9;--hat:#fff;--skin:#a96f51"/></g>
+       <g class="walker" style="--delay:-.5s"><use href="#kid" x="615" y="520" width="43" height="80" style="color:#3c9b79;--hat:#e85d75;--skin:#f1c7a2"/></g>
+       <g class="walker" style="--delay:-1.8s"><use href="#kid" x="675" y="535" width="41" height="76" style="color:#b16ac7;--hat:#ffd166;--skin:#8d5524"/></g>
+       <g class="walker" style="--delay:-.9s"><use href="#kid" x="900" y="535" width="42" height="78" style="color:#e0a33a;--hat:#4d91c9;--skin:#e6b58e"/></g>
+       <g class="walker" style="--delay:-2.1s"><use href="#kid" x="950" y="535" width="42" height="78" style="color:#3c9b79;--hat:#e85d75;--skin:#9b6749"/></g>
+       <g class="walker" style="--delay:-1.4s"><use href="#kid" x="1120" y="530" width="40" height="74" style="color:#d85b70;--hat:#ffd166;--skin:#f1c7a2"/></g>
+      </g>
+      <!-- festive lamp posts with warm pools of light -->
+      <g id="lampPosts">
+       <g transform="translate(395 445)"><circle cx="0" cy="0" r="54" fill="url(#lampGlow)" opacity=".55"/><path d="M0 12V150" stroke="#27364f" stroke-width="8"/><path d="M-20 12H20L15 -18H-15Z" fill="#27364f" stroke="#e8c78b" stroke-width="3"/><rect x="-11" y="-12" width="22" height="23" rx="7" fill="#ffe6a3" filter="url(#lampBlur)"/><path d="M-25 150H25" stroke="#27364f" stroke-width="7" stroke-linecap="round"/></g>
+       <g transform="translate(875 440)"><circle cx="0" cy="0" r="58" fill="url(#lampGlow)" opacity=".6"/><path d="M0 12V158" stroke="#27364f" stroke-width="8"/><path d="M-20 12H20L15 -18H-15Z" fill="#27364f" stroke="#e8c78b" stroke-width="3"/><rect x="-11" y="-12" width="22" height="23" rx="7" fill="#ffe6a3" filter="url(#lampBlur)"/><path d="M-25 158H25" stroke="#27364f" stroke-width="7" stroke-linecap="round"/></g>
+      </g>
+      <!-- twinkling foreground sparkle -->
+      <g id="villageSparkles" fill="#fff4d0">
+       <path d="M175 405v14m-7-7h14" stroke="#fff4d0" stroke-width="2" opacity=".8"><animate attributeName="opacity" values=".15;1;.15" dur="2.8s" repeatCount="indefinite"/></path>
+       <path d="M760 375v12m-6-6h12" stroke="#fff4d0" stroke-width="2"><animate attributeName="opacity" values=".2;1;.2" dur="3.4s" repeatCount="indefinite"/></path>
+       <path d="M1080 250v14m-7-7h14" stroke="#fff4d0" stroke-width="2"><animate attributeName="opacity" values=".1;1;.1" dur="2.4s" repeatCount="indefinite"/></path>
+      </g>
       <!-- snowman -->
       <g>
        <circle cx="300" cy="565" r="38" fill="#fff"/><circle cx="300" cy="508" r="28" fill="#fff"/><circle cx="300" cy="462" r="20" fill="#fff"/>
