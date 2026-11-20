@@ -899,32 +899,33 @@ $$('[data-sub]').forEach(b=>b.addEventListener('click',e=>{toast('🎉 Subscribe
  const btn=$('#musicBtn');
  function stop(){
   if(player){player.remove();player=null}
-  playing=false;btn.setAttribute('aria-pressed','false');btn.textContent='🎵 Last Christmas';
+  playing=false;btn.setAttribute('aria-pressed','false');btn.textContent='🎵 Play Last Christmas';
  }
  function start(){
+  if(player)player.remove();
   player=document.createElement('section');
   player.id='lastChristmasPlayer';
-  player.setAttribute('aria-label','Last Christmas music player');
-  player.style.cssText='position:fixed;right:18px;bottom:18px;width:min(360px,calc(100vw - 36px));z-index:100000;background:rgba(12,24,35,.96);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:18px;overflow:hidden;box-shadow:0 14px 48px rgba(0,0,0,.45);font:600 13px system-ui';
+  player.setAttribute('aria-label','Wham! Last Christmas music player');
+  player.style.cssText='position:fixed;right:18px;bottom:18px;width:min(420px,calc(100vw - 28px));z-index:100000;background:#101c2a;color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:18px;overflow:hidden;box-shadow:0 14px 48px rgba(0,0,0,.5);font:600 13px system-ui';
   const top=document.createElement('div');
-  top.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 12px';
+  top.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px';
   const label=document.createElement('span');label.textContent='🎄 WHAM! — LAST CHRISTMAS';
-  const close=document.createElement('button');close.type='button';close.textContent='✕';close.setAttribute('aria-label','Close music player');close.style.cssText='border:0;background:transparent;color:white;font-size:18px;cursor:pointer;padding:2px 6px';
+  const close=document.createElement('button');close.type='button';close.textContent='✕';close.setAttribute('aria-label','Close music player');close.style.cssText='border:0;background:transparent;color:white;font-size:20px;cursor:pointer;padding:2px 7px';
   close.onclick=stop;top.append(label,close);
   const frame=document.createElement('iframe');
-  frame.src='https://www.youtube.com/embed/E8gmARGvPlI?autoplay=1&playsinline=1&rel=0';
   frame.title='Wham! — Last Christmas (Official Music Video)';
   frame.allow='autoplay; encrypted-media; picture-in-picture; web-share';
   frame.referrerPolicy='strict-origin-when-cross-origin';frame.allowFullscreen=true;
   frame.style.cssText='width:100%;aspect-ratio:16/9;border:0;display:block;background:#000';
+  frame.src='https://www.youtube-nocookie.com/embed/E8gmARGvPlI?autoplay=1&controls=1&playsinline=1&rel=0';
   const fallback=document.createElement('a');
   fallback.href='https://www.youtube.com/watch?v=E8gmARGvPlI';fallback.target='_blank';fallback.rel='noopener noreferrer';
-  fallback.textContent='If playback does not start, open Last Christmas on YouTube ↗';
-  fallback.style.cssText='display:block;padding:9px 12px;color:#d8efff;text-decoration:none;font:12px system-ui';
+  fallback.textContent='▶ If it does not start here, play Last Christmas on YouTube ↗';
+  fallback.style.cssText='display:block;padding:11px 13px;color:#d8efff;text-decoration:none;font:600 12px system-ui;background:#17283a';
   player.append(top,frame,fallback);document.body.appendChild(player);
   playing=true;btn.setAttribute('aria-pressed','true');btn.textContent='⏸ Stop Last Christmas';
  }
- btn.textContent='🎵 Last Christmas';
+ btn.textContent='🎵 Play Last Christmas';
  btn.onclick=()=>playing?stop():start();
 })();
 
