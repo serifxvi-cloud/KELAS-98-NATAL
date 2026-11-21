@@ -94,8 +94,8 @@ h2.h{font-size:clamp(2rem,5vw,3.4rem);line-height:1.1;margin-bottom:14px}
 .bg-b{background:#0b1030}
 .bg-c{background:linear-gradient(#0b1030,#14102e)}
 .deco{position:absolute;font-size:clamp(40px,6vw,80px);opacity:.18;z-index:1;pointer-events:none;will-change:transform}
-.rv{opacity:0;transform:translate3d(0,28px,0);transition:opacity .85s ease,transform .85s cubic-bezier(.22,.75,.25,1);will-change:opacity,transform}
-.rv.in{opacity:1;transform:translate3d(0,0,0)}
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s ease,transform .8s ease}
+.rv.in{opacity:1;transform:none}
 
 /* VIEWER */
 .viewer-shell{border-radius:28px;border:1px solid var(--line);background:var(--glass);padding:10px;box-shadow:0 30px 80px rgba(0,0,0,.45)}
@@ -224,10 +224,10 @@ footer p{color:var(--mute);margin-top:16px}
 .fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none}
 .fx.grade{z-index:43;background:linear-gradient(180deg,rgba(0,70,110,.16),rgba(255,130,40,.10));mix-blend-mode:soft-light}
 .fx.vig{z-index:44;background:radial-gradient(ellipse at center,transparent 52%,rgba(0,0,0,.6) 100%)}
-#grain.fx{display:none!important;animation:none!important}
+#grain.fx{z-index:45;opacity:.12;mix-blend-mode:overlay;background-size:220px 220px;animation:gmove .9s steps(1) infinite}
 @keyframes gmove{0%{background-position:0 0}16%{background-position:-70px 40px}33%{background-position:30px -90px}50%{background-position:-120px -30px}66%{background-position:90px 70px}83%{background-position:-40px 110px}}
 .cine-off .fx,.cine-off .lbx,.cine-off .vf,.cine-off .leak,.cine-off #subs{display:none}
-.rv{opacity:0;transform:translateY(26px) scale(.992);filter:blur(5px);transition:opacity 1.55s cubic-bezier(.22,1,.36,1),transform 1.7s cubic-bezier(.22,1,.36,1),filter 1.45s cubic-bezier(.22,1,.36,1);will-change:opacity,transform,filter}
+.rv{opacity:0;transform:translateY(40px) scale(.985);filter:blur(10px);transition:opacity 1.1s ease,transform 1.1s cubic-bezier(.2,.8,.2,1),filter 1.1s ease}
 .rv.in{opacity:1;transform:none;filter:none}
 
 /* intro */
@@ -285,11 +285,11 @@ body.intro .hero-content{visibility:hidden;animation:unhide 0s linear 12s forwar
 .vf .rec em{display:inline-block;width:10px;height:10px;border-radius:50%;background:#ff2a2a;margin-right:8px;box-shadow:0 0 10px #ff2a2a;animation:recb 1.2s steps(2) infinite}
 @keyframes recb{50%{opacity:0}}
 .vf .spec{top:8px;right:44px}.vf .tcw{bottom:8px;left:44px;font-variant-numeric:tabular-nums}.vf .scn{bottom:8px;right:44px}
-.hero.go .hero-content>*{animation:seqIn 1.9s cubic-bezier(.22,1,.36,1) backwards;animation-delay:calc(var(--i,0)*.28s + .45s)}
-@keyframes seqIn{from{opacity:0;transform:translateY(22px) scale(.992);filter:blur(5px)}}
-.hero.go h1.title .l1{animation:shimmer 6s linear infinite,track 3.4s cubic-bezier(.22,1,.36,1) .7s backwards}
-.hero.go h1.title .l2{animation:track 3s cubic-bezier(.22,1,.36,1) 1.05s backwards}
-@keyframes track{from{letter-spacing:.14em;filter:blur(6px);opacity:0;transform:translateY(12px)}}
+.hero.go .hero-content>*{animation:seqIn 1.4s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*.34s + .5s)}
+@keyframes seqIn{from{opacity:0;transform:translateY(28px) scale(.98);filter:blur(10px)}}
+.hero.go h1.title .l1{animation:shimmer 6s linear infinite,track 3s cubic-bezier(.2,.8,.2,1) .8s backwards}
+.hero.go h1.title .l2{animation:track 2.6s cubic-bezier(.2,.8,.2,1) 1.3s backwards}
+@keyframes track{from{letter-spacing:.2em;filter:blur(12px);opacity:0}}
 .hero:has(.frame:hover) .layer{filter:blur(3px)}
 .hero .layer{transition:filter .6s}
 
@@ -300,49 +300,100 @@ body.intro .hero-content{visibility:hidden;animation:unhide 0s linear 12s forwar
 .chapter .cem{position:absolute;left:50%;top:50%;font-size:min(46vw,380px);opacity:.05;transform:translate(-50%,-50%);animation:cfloat 9s ease-in-out infinite alternate;pointer-events:none}
 @keyframes cfloat{to{transform:translate(-50%,-56%) rotate(6deg)}}
 .chapter .ct{position:relative;z-index:2;max-width:900px}
-.chapter small{display:block;font-family:Cinzel,Georgia,serif;letter-spacing:.3em;color:var(--gold);font-size:.82rem;opacity:0;transform:translateY(10px);transition:opacity 1.5s cubic-bezier(.22,1,.36,1) .1s,transform 1.7s cubic-bezier(.22,1,.36,1) .1s,letter-spacing 2.4s cubic-bezier(.22,1,.36,1)}
-.chapter h3{font-size:clamp(2.4rem,8.5vw,6.2rem);line-height:1.05;margin:16px 0 18px;opacity:0;filter:blur(7px);letter-spacing:.12em;transform:translateY(12px) scale(1.015);transition:opacity 2s cubic-bezier(.22,1,.36,1) .22s,filter 2s cubic-bezier(.22,1,.36,1) .22s,letter-spacing 2.4s cubic-bezier(.22,1,.36,1) .22s,transform 2.1s cubic-bezier(.22,1,.36,1) .22s}
-.chapter .ln{height:1px;width:0;margin:0 auto 18px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transition:width 2.3s cubic-bezier(.22,1,.36,1) .55s}
-.chapter p{font-family:Cinzel,Georgia,serif;color:var(--mute);letter-spacing:.14em;font-size:clamp(.85rem,1.8vw,1.05rem);opacity:0;transform:translateY(8px);transition:opacity 1.7s cubic-bezier(.22,1,.36,1) .65s,transform 1.8s cubic-bezier(.22,1,.36,1) .65s}
+.chapter small{display:block;font-family:Cinzel,Georgia,serif;letter-spacing:.3em;color:var(--gold);font-size:.82rem;opacity:0;transform:translateY(12px);transition:opacity 1.4s,transform 1.4s,letter-spacing 2.4s}
+.chapter h3{font-size:clamp(2.4rem,8.5vw,6.2rem);line-height:1.05;margin:16px 0 18px;opacity:0;filter:blur(18px);letter-spacing:.2em;transform:scale(1.06);transition:opacity 1.8s cubic-bezier(.2,.8,.2,1) .3s,filter 1.8s ease .3s,letter-spacing 2.4s cubic-bezier(.2,.8,.2,1) .3s,transform 2.4s ease .3s}
+.chapter .ln{height:1px;width:0;margin:0 auto 18px;background:linear-gradient(90deg,transparent,var(--gold),transparent);transition:width 2.2s ease .6s}
+.chapter p{font-family:Cinzel,Georgia,serif;color:var(--mute);letter-spacing:.14em;font-size:clamp(.85rem,1.8vw,1.05rem);opacity:0;transition:opacity 1.6s ease 1.2s}
 .chapter.in small{opacity:1;transform:none;letter-spacing:.7em}
 .chapter.in h3{opacity:1;filter:none;letter-spacing:.015em;transform:none}
 .chapter.in .ln{width:min(520px,70%)}
-.chapter.in p{opacity:1;transform:none}
-#village.bg-a{background:radial-gradient(ellipse at 50% 4%,#394c91 0%,#151f4d 36%,#09132f 100%)}
-#village .viewer-shell{filter:drop-shadow(0 28px 65px rgba(92,139,255,.22))}
-#village .viewer{border:1px solid rgba(225,239,255,.42);box-shadow:0 0 0 7px rgba(205,224,255,.045),0 0 70px rgba(139,171,255,.22)}
-#village #vsvg{filter:saturate(1.13) contrast(1.03)}
-#village #villageLights .bulb{animation:festiveGlow 1.8s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
-#village #aurora{animation:auroraDrift 18s ease-in-out infinite alternate;transform-origin:center}
-@keyframes auroraDrift{from{transform:translateX(-22px) skewY(-1deg);opacity:.2}to{transform:translateX(24px) skewY(1deg);opacity:.52}}
-#village #villageWalkers .walker{transform-box:fill-box;transform-origin:center bottom;animation:villagerWalk 3.2s ease-in-out var(--delay,0s) infinite}
-@keyframes villagerWalk{0%,100%{transform:translateY(0) rotate(-1deg)}25%{transform:translateY(-3px) rotate(1deg)}50%{transform:translateY(0) rotate(-1deg)}75%{transform:translateY(-2px) rotate(1deg)}}
-#village #lampPosts{filter:drop-shadow(0 0 9px rgba(255,213,130,.4))}
-#village #distantHomes{filter:drop-shadow(0 0 13px rgba(255,205,125,.2))}
-#village #villageSparkles{animation:sparklePulse 3s ease-in-out infinite alternate}
-@keyframes sparklePulse{from{opacity:.35}to{opacity:1}}
-#village .viewer{background:linear-gradient(145deg,#172451,#9e91c5 70%,#eff5ff)}
-#village .viewer-shell{position:relative}
-#village .viewer-shell:after{content:"";position:absolute;inset:-18px;border-radius:30px;background:radial-gradient(ellipse,rgba(151,186,255,.12),transparent 68%);pointer-events:none;z-index:-1}
-@media(prefers-reduced-motion:reduce){#village #aurora,#village #villageWalkers .walker,#village #villageSparkles{animation:none!important}}
-
-@keyframes festiveGlow{from{opacity:.55;filter:drop-shadow(0 0 3px currentColor)}to{opacity:1;filter:drop-shadow(0 0 13px currentColor)}}
-#village #villageCrowd .bob{transform-box:fill-box;transform-origin:center bottom}
-#village #villageSnow circle{animation:flurry 7s linear infinite}
-@keyframes flurry{from{transform:translate3d(0,-18px,0);opacity:.1}20%{opacity:.9}to{transform:translate3d(18px,720px,0);opacity:.2}}
+.chapter.in p{opacity:1}
 #village.bg-a{background:linear-gradient(#03040c 0%,#0d1636 14%,#0d1636 100%)}
 
 /* subtitles */
 #subs{position:fixed;left:50%;bottom:10vh;transform:translateX(-50%);z-index:120;padding:6px 16px;max-width:min(760px,90vw);text-align:center;font-weight:600;font-size:clamp(.95rem,2vw,1.2rem);color:#fff;text-shadow:0 0 6px #000,0 2px 2px #000;background:rgba(0,0,0,.4);border-radius:6px;opacity:0;transition:opacity .5s;pointer-events:none}
 #subs.on{opacity:1}
 @media(max-width:700px){.vf .spec,.vf .scn{display:none}.vf{inset:calc(6vh + 10px) 12px calc(6vh + 10px)}.lbx span{font-size:.5rem;letter-spacing:.2em}}
-@media(max-width:560px){.nav-actions .primary{display:none}}
+@media(max-width:560px){.nav-actions .primary{display:none}.nav{padding:8px 10px 8px 14px}.logo{font-size:0}.logo span{font-size:1.3rem}.nav-actions .btn{padding:8px 12px;font-size:.78rem}}
+
+/* ===== SCENE TRANSITIONS ===== */
+.chapter{position:sticky;top:0;z-index:1;height:100vh;height:100svh;min-height:0}
+section.sec,footer{position:relative;z-index:2}
+section.sec{box-shadow:0 -40px 90px rgba(0,0,0,.75);border-top:1px solid rgba(255,209,102,.25)}
+footer{box-shadow:0 -40px 90px rgba(0,0,0,.75)}
+.chapter .ct{transform:scale(calc(1 - var(--c,0)*.16));opacity:calc(1 - var(--c,0)*.9);filter:blur(calc(var(--c,0)*12px));will-change:transform,opacity}
+.chapter .cem{opacity:calc(.05 + var(--c,0)*.06)}
+.hero-fade{position:absolute;inset:0;z-index:30;background:#000;opacity:calc(var(--u,0)*.88);pointer-events:none}
+.curtain{position:fixed;left:0;right:0;height:15vh;background:#000;z-index:60;pointer-events:none;transform:scaleY(var(--b,0));will-change:transform}
+.curtain.t{top:0;transform-origin:top;border-bottom:1px solid rgba(255,209,102,.45)}
+.curtain.b{bottom:0;transform-origin:bottom;border-top:1px solid rgba(255,209,102,.45)}
+#sweep{position:fixed;inset:0;z-index:46;pointer-events:none;opacity:0;transform:translateX(-120%);mix-blend-mode:screen;background:linear-gradient(105deg,transparent 34%,rgba(255,226,150,.25) 47%,rgba(255,255,255,.45) 50%,rgba(255,226,150,.25) 53%,transparent 66%)}
+#sweep.go{animation:sweepgo .95s cubic-bezier(.3,.6,.3,1)}
+@keyframes sweepgo{0%{opacity:1;transform:translateX(-120%)}100%{opacity:1;transform:translateX(120%)}}
+.cine-off .curtain,.cine-off #sweep{display:none}
+#dots{position:fixed;right:16px;top:50%;transform:translateY(-50%);z-index:85;display:flex;flex-direction:column;gap:13px}
+#dots button{position:relative;width:10px;height:10px;padding:0;border-radius:99px;border:1.5px solid rgba(255,255,255,.65);background:rgba(0,0,0,.25);transition:all .4s cubic-bezier(.2,.8,.2,1)}
+#dots button.on{height:28px;background:var(--gold);border-color:var(--gold);box-shadow:0 0 14px rgba(255,209,102,.75)}
+#dots button::after{content:attr(data-l);position:absolute;right:22px;top:50%;transform:translateY(-50%) translateX(8px);white-space:nowrap;font-size:.72rem;font-weight:600;letter-spacing:.08em;padding:4px 10px;border-radius:8px;background:rgba(10,16,46,.88);border:1px solid var(--line);opacity:0;pointer-events:none;transition:.25s}
+#dots button:hover::after{opacity:1;transform:translateY(-50%)}
+body.intro #dots{display:none}
+@media(max-width:560px){#dots{right:6px;gap:10px}#dots button::after{display:none}}
+
+/* ===== 3D PARALLAX VILLAGE ===== */
+#village{padding:0 0 110px;overflow:visible}
+#village .wrap{padding:110px 20px 0}
+.journey{position:relative;height:640vh;margin:0}
+.jstage{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#050820;isolation:isolate}
+.jsky{position:absolute;inset:0;background:linear-gradient(#030518 0%,#0e1858 24%,#2f2f86 38%,#a8638f 45%,#5b3f8f 46%,#2a2060 100%);overflow:hidden}
+.jstars{position:absolute;inset:0 0 56% 0}
+.jmt{position:absolute;left:-8%;width:116%;top:calc(45% - 186px);height:210px;transform-origin:50% 100%;will-change:transform}
+.jsleigh{position:absolute;top:10%;left:0;width:min(250px,34vw);filter:drop-shadow(0 0 12px rgba(255,209,102,.4));will-change:transform}
+.jview{position:absolute;inset:0;perspective:800px;perspective-origin:50% 45%}
+.cam{position:absolute;inset:0;transform-style:preserve-3d;transform-origin:50% 45%}
+.world{position:absolute;left:50%;top:45%;width:0;height:0;transform-style:preserve-3d}
+.ground{position:absolute;left:-1800px;top:0;width:3600px;height:8200px;transform:translate3d(0,232px,620px) rotateX(-90deg);transform-origin:50% 0;
+ background:linear-gradient(180deg,#a9b9e6 0%,#8e9fd6 14%,#5f6bb0 45%,#3d3f86 80%,#33327a 100%)}
+.ground::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:430px;margin-left:-215px;
+ background:repeating-linear-gradient(180deg,rgba(255,255,255,.11) 0 3px,transparent 3px 56px),linear-gradient(90deg,rgba(255,209,102,.4),rgba(140,120,170,.55) 8%,rgba(140,120,170,.55) 92%,rgba(255,209,102,.4))}
+.ground::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:8px;margin-left:-4px;background:repeating-linear-gradient(180deg,#ffd166 0 34px,transparent 34px 92px);opacity:.75}
+.it{position:absolute;left:0;top:0;pointer-events:none;backface-visibility:visible}
+.it svg{display:block;width:100%;height:100%;overflow:visible}
+.pool{background:radial-gradient(circle,rgba(255,209,102,.55),rgba(255,170,60,.16) 46%,transparent 70%);border-radius:50%}
+.dust .dd{display:block;width:100%;height:100%;border-radius:50%;background:radial-gradient(circle,#fff6c8,rgba(255,209,102,.6) 40%,transparent 70%);animation:twinkle 3s ease-in-out infinite}
+.coin{pointer-events:auto;cursor:pointer}
+.cw{width:100%;height:100%;animation:cbob 2s ease-in-out infinite alternate;transition:transform .5s,opacity .5s}
+@keyframes cbob{to{transform:translateY(-12px)}}
+.cn{width:100%;height:100%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff3b0,#ffd166 45%,#c98a14);border:3px solid #fff3b0;box-shadow:0 0 18px 4px rgba(255,209,102,.7);display:grid;place-items:center;font-weight:800;color:#8a5a00;font-size:24px;animation:cspin 2.6s linear infinite}
+@keyframes cspin{to{transform:rotateY(360deg)}}
+.coin.got{pointer-events:none}
+.coin.got .cw{animation:none;transform:translateY(-80px) scale(1.9);opacity:0}
+.jfog{position:absolute;left:0;right:0;top:calc(45% - 80px);height:210px;background:linear-gradient(transparent,rgba(200,120,170,.38) 52%,transparent);pointer-events:none}
+.jgold{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 58%,rgba(255,209,102,.5),rgba(255,150,60,.12) 50%,transparent 72%);mix-blend-mode:screen;opacity:0;pointer-events:none}
+#jfx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.jhud{position:absolute;left:clamp(16px,5vw,64px);top:96px;z-index:9;padding:9px 16px;border-radius:999px;background:rgba(10,16,46,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,209,102,.45);font-weight:700;font-size:.92rem;display:flex;gap:6px;align-items:center}
+.jhud b{color:var(--gold);font-variant-numeric:tabular-nums;font-size:1.05rem}
+.jhud span:last-child{color:var(--mute);font-weight:600;margin-left:4px}
+.jhud.bump{animation:hbump .4s}
+@keyframes hbump{40%{transform:scale(1.15)}}
+.jcaps{position:absolute;left:clamp(16px,5vw,64px);bottom:calc(10vh + 78px);z-index:8;width:min(540px,calc(100% - 32px));height:0;pointer-events:none}
+.jc{position:absolute;left:0;bottom:0;width:100%;opacity:0;transform:translateY(26px);filter:blur(8px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1),filter .9s}
+.jc.on{opacity:1;transform:none;filter:none}
+.jc small{font-family:Cinzel,Georgia,serif;letter-spacing:.35em;color:var(--gold);font-size:.74rem}
+.jc h3{font-size:clamp(2rem,5.5vw,3.8rem);line-height:1.04;margin:6px 0 8px;text-shadow:0 4px 30px rgba(0,0,0,.8),0 0 2px rgba(0,0,0,.6)}
+.jc p{color:#e4eaff;text-shadow:0 2px 14px rgba(0,0,0,.9);max-width:44ch}
+.jstage::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 55% at 0% 100%,rgba(3,5,24,.72),transparent 70%);pointer-events:none;z-index:7}
+.jhint{position:absolute;left:50%;top:calc(45% + 150px);transform:translateX(-50%);z-index:8;padding:8px 18px;border-radius:999px;background:rgba(10,16,46,.55);border:1px solid var(--line);font-size:.85rem;font-weight:600;color:#fff;animation:bob 2s ease-in-out infinite;transition:opacity .6s;pointer-events:none;white-space:nowrap}
+.jhint.hide{opacity:0}
+.jprog{position:absolute;left:0;bottom:0;height:3px;width:0;z-index:9;background:linear-gradient(90deg,var(--red),var(--gold),var(--green))}
+@media(max-width:700px){.jhud{top:84px}.jc h3{font-size:2rem}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
 </style>
 </head>
 <body class="intro">
 <div id="progress"></div>
 <canvas id="snow"></canvas>
+<div class="curtain t" id="barT"></div><div class="curtain b" id="barB"></div><div id="sweep"></div>
+<nav id="dots" aria-label="Scenes"></nav>
 <div class="fx grade"></div><div class="fx vig"></div><div class="fx" id="grain"></div>
 <div id="toast" role="status"></div>
 <div id="subs" aria-live="polite"></div>
@@ -517,7 +568,7 @@ body.intro .hero-content{visibility:hidden;animation:unhide 0s linear 12s forwar
    <use href="#gift" x="1060" y="150" width="58" height="58" style="color:#4895ef;--rib:#ffd166"/>
   </svg>
  </div>
- <div class="bokeh" id="bokeh"></div><div class="leak"></div>
+ <div class="hero-fade"></div><div class="bokeh" id="bokeh"></div><div class="leak"></div>
  <div class="lbx t"></div><div class="lbx b"><span>A KELAS 98 PRODUCTION · FILMED ON LOCATION AT THE NORTH POLE</span></div>
  <div class="vf"><i class="tl"></i><i class="tr"></i><i class="bl"></i><i class="br"></i><span class="rec"><em></em>REC</span><span class="spec">4K · 24 FPS · DOLBY SNOW</span><span class="tcw" id="tc">00:00:00:00</span><span class="scn">SCENE 1 · TAKE 1</span></div>
  <div class="scroll-hint">scroll ↓</div>
@@ -526,13 +577,40 @@ body.intro .hero-content{visibility:hidden;animation:unhide 0s linear 12s forwar
 <div class="chapter"><span class="cem">🏘️</span><div class="ct"><small>CHAPTER I</small><h3 class="display">The Winter Village</h3><div class="ln"></div><p>WHERE THE SNOW NEVER STOPS FALLING</p></div></div>
 <!-- VILLAGE -->
 <section class="sec bg-a" id="village">
- <div class="deco" data-px=".25" style="left:4%;top:12%">🎄</div>
- <div class="deco" data-px="-.2" style="right:6%;top:20%">⭐</div>
+ <div class="journey" id="journey">
+  <div class="jstage" id="jstage" aria-label="Scroll to walk through the prosperous Christmas village">
+   <div class="jsky" id="jsky">
+    <div class="jstars" id="jstars"></div>
+    <div class="aurora" style="top:2%;height:44%"></div>
+    <div class="moon" style="right:15%;top:8%"></div>
+    <div class="jsleigh" id="jsleigh"><svg viewBox="0 0 470 170"><use href="#sleigh" width="470" height="170"/></svg></div>
+    <svg class="jmt" id="jmt" viewBox="0 0 1440 210" preserveAspectRatio="none" aria-hidden="true">
+     <path d="M0 210 V150 L90 90 L170 140 L280 50 L400 140 L500 100 L620 150 L760 60 L880 140 L1000 90 L1120 150 L1240 70 L1340 130 L1440 100 V210Z" fill="#1b2a73"/>
+     <path d="M280 50 L255 86 L280 78 L302 92Z M760 60 L736 96 L762 88 L784 100Z M1240 70 L1216 100 L1240 94 L1260 106Z" fill="#dfe8ff" opacity=".8"/>
+     <path d="M0 210 V172 Q200 124 420 166 T860 150 T1440 162 V210Z" fill="#141f58"/>
+     <g fill="#ffd166"><circle class="tw" cx="520" cy="176" r="2"/><circle class="tw" cx="560" cy="170" r="2" style="animation-delay:.6s"/><circle class="tw" cx="610" cy="178" r="2" style="animation-delay:1.2s"/><circle class="tw" cx="700" cy="168" r="2" style="animation-delay:.3s"/><circle class="tw" cx="760" cy="174" r="2" style="animation-delay:1.7s"/><circle class="tw" cx="830" cy="166" r="2" style="animation-delay:.9s"/><circle class="tw" cx="900" cy="172" r="2"/><circle class="tw" cx="980" cy="178" r="2" style="animation-delay:1.4s"/></g>
+    </svg>
+   </div>
+   <div class="jview"><div class="cam" id="jcam"><div class="world" id="jworld"></div></div></div>
+   <div class="jfog"></div><div class="jgold" id="jgold"></div>
+   <canvas id="jfx"></canvas>
+   <div class="jhud" id="jhud" title="Click the floating coins to collect them">🪙 <b id="hudN">0</b> / <span id="hudT">24</span> <span>Prosperity</span></div>
+   <div class="jcaps">
+    <div class="jc on"><small>CHAPTER I · SCENE 1</small><h3 class="display">The Golden Gate</h3><p>Step inside. Every window is glowing and every table is full.</p></div>
+    <div class="jc"><small>SCENE 2</small><h3 class="display">Main Street Market</h3><p>Fresh bread, warm lights and shops that never close.</p></div>
+    <div class="jc"><small>SCENE 3</small><h3 class="display">Gifts for Everyone</h3><p>Toy makers, bakers and kids playing in the snow. Grab the golden coins!</p></div>
+    <div class="jc"><small>SCENE 4</small><h3 class="display">The Town Square</h3><p>The great tree stands tall, wrapped in gold and light.</p></div>
+    <div class="jc"><small>FINALE</small><h3 class="display">A Prosperous <span id="nyYear">2027</span></h3><p>Health, wealth, joy and success for every one of KELAS 98.</p></div>
+   </div>
+   <div class="jhint" id="jhint">↓ Scroll to walk into the village</div>
+   <div class="jprog" id="jprog"></div>
+  </div>
+ </div>
  <div class="wrap">
   <div class="head rv">
-   <span class="eyebrow">Interactive scene</span>
-   <h2 class="h display">Welcome to the KELAS 98 Winter Village</h2>
-   <p class="lead">Santa is on his way, the kids are out playing in the snow, and the cabin is all lit up. Zoom in to discover the little details.</p>
+   <span class="eyebrow">Village map</span>
+   <h2 class="h display">See the whole village from above</h2>
+   <p class="lead">Prefer a bird's-eye view? Zoom in and drag around the village to discover the little details.</p>
   </div>
   <div class="viewer-shell rv">
    <div class="viewer" id="vViewer" tabindex="0" aria-label="Winter village scene. Use plus and minus to zoom.">
@@ -543,8 +621,6 @@ body.intro .hero-content{visibility:hidden;animation:unhide 0s linear 12s forwar
        <linearGradient id="vsnow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f6faff"/><stop offset="1" stop-color="#bfd2fa"/></linearGradient>
        <radialGradient id="moonGlow"><stop offset="0" stop-color="#fff6d6" stop-opacity=".5"/><stop offset="1" stop-color="#fff6d6" stop-opacity="0"/></radialGradient>
        <radialGradient id="lampGlow"><stop offset="0" stop-color="#ffd166" stop-opacity=".55"/><stop offset="1" stop-color="#ffd166" stop-opacity="0"/></radialGradient>
-       <filter id="auroraBlur" x="-20%" y="-30%" width="140%" height="160%"><feGaussianBlur stdDeviation="18"/></filter>
-       <filter id="lampBlur" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="4"/></filter>
       </defs>
       <rect width="1200" height="700" fill="url(#vsky)"/>
       <g id="vStars"></g>
@@ -579,91 +655,6 @@ body.intro .hero-content{visibility:hidden;animation:unhide 0s linear 12s forwar
       <!-- right trees -->
       <use href="#pine" x="1090" y="400" width="100" height="150" class="sway"/>
       <use href="#pine" x="745" y="440" width="70" height="105" class="sway"/>
-      <!-- Dreamy village cottages in the snowy distance -->
-      <g opacity=".98">
-       <g transform="translate(55 378)"><circle cx="95" cy="85" r="105" fill="url(#lampGlow)" opacity=".5"/><path d="M0 86 L92 12 L184 86Z" fill="#29466f"/><path d="M-8 88 Q45 70 92 82 Q140 70 192 88 L184 98 H0Z" fill="#fff"/><rect x="20" y="86" width="144" height="92" rx="5" fill="#a75e4b"/><rect x="35" y="105" width="36" height="40" rx="3" fill="#ffd88a" stroke="#fff2ce" stroke-width="4"/><path d="M53 105V145 M35 125H71" stroke="#8a503e" stroke-width="3"/><rect x="111" y="105" width="36" height="40" rx="3" fill="#ffd88a" stroke="#fff2ce" stroke-width="4"/><path d="M129 105V145 M111 125H147" stroke="#8a503e" stroke-width="3"/><rect x="80" y="130" width="26" height="48" fill="#573b39"/><path d="M0 88 Q45 72 92 82 Q140 72 184 88" fill="none" stroke="#fff" stroke-width="12" stroke-linecap="round"/></g>
-       <g transform="translate(660 405) scale(.72)"><circle cx="95" cy="85" r="110" fill="url(#lampGlow)" opacity=".45"/><path d="M0 86 L92 12 L184 86Z" fill="#314c78"/><path d="M-8 88 Q45 70 92 82 Q140 70 192 88 L184 98 H0Z" fill="#fff"/><rect x="20" y="86" width="144" height="92" rx="5" fill="#8d5547"/><rect x="35" y="105" width="36" height="40" rx="3" fill="#ffe09a" stroke="#fff2ce" stroke-width="4"/><path d="M53 105V145 M35 125H71" stroke="#8a503e" stroke-width="3"/><rect x="111" y="105" width="36" height="40" rx="3" fill="#ffe09a" stroke="#fff2ce" stroke-width="4"/><path d="M129 105V145 M111 125H147" stroke="#8a503e" stroke-width="3"/><rect x="80" y="130" width="26" height="48" fill="#573b39"/></g>
-      </g>
-      <!-- Warm market stalls: traders, gifts and winter treats -->
-      <g id="marketStalls">
-       <g transform="translate(130 468)">
-        <ellipse cx="95" cy="78" rx="125" ry="20" fill="#7189b6" opacity=".2"/>
-        <path d="M8 22 L20 -18 H170 L184 22Z" fill="#9b2636" stroke="#f8dca4" stroke-width="4"/>
-        <path d="M8 22 H184 L168 42 H24Z" fill="#f6e8d2"/>
-        <path d="M28 -16 V22 M60 -16 V22 M92 -16 V22 M124 -16 V22 M156 -16 V22" stroke="#d9b88b" stroke-width="2"/>
-        <rect x="18" y="42" width="156" height="58" rx="5" fill="#754735"/><rect x="10" y="38" width="172" height="12" rx="4" fill="#d69b62"/>
-        <g fill="#ffd166"><circle cx="48" cy="65" r="8"/><circle cx="75" cy="65" r="8"/><circle cx="102" cy="65" r="8"/></g><g fill="#e63946"><circle cx="135" cy="65" r="8"/></g>
-        <path d="M18 42V100 M174 42V100" stroke="#e9cda2" stroke-width="5"/>
-        <text x="96" y="13" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" letter-spacing="2">HOT COCOA</text>
-       </g>
-       <g transform="translate(735 490) scale(.78)">
-        <path d="M8 22 L20 -18 H170 L184 22Z" fill="#276b56" stroke="#f8dca4" stroke-width="4"/><path d="M8 22 H184 L168 42 H24Z" fill="#f6e8d2"/>
-        <path d="M28 -16 V22 M60 -16 V22 M92 -16 V22 M124 -16 V22 M156 -16 V22" stroke="#d9b88b" stroke-width="2"/>
-        <rect x="18" y="42" width="156" height="58" rx="5" fill="#754735"/><rect x="10" y="38" width="172" height="12" rx="4" fill="#d69b62"/>
-        <g fill="#ffd166"><circle cx="48" cy="65" r="8"/><circle cx="75" cy="65" r="8"/></g><g fill="#e63946"><circle cx="102" cy="65" r="8"/><circle cx="135" cy="65" r="8"/></g>
-        <text x="96" y="13" text-anchor="middle" font-size="13" font-weight="800" fill="#fff" letter-spacing="2">GIFTS &amp; TREATS</text>
-       </g>
-      </g>
-      <!-- More villagers: chatting, laughing and shopping together -->
-      <g id="villageCrowd">
-       <g class="bob" style="animation-delay:-.6s"><use href="#kid" x="72" y="485" width="47" height="88" style="color:#e85d75;--hat:#f7c95c;--skin:#f0c39a"/></g>
-       <g class="bob" style="animation-delay:-1.1s"><use href="#kid" x="280" y="485" width="48" height="90" style="color:#4b91ce;--hat:#e85d75;--skin:#9b6749"/></g>
-       <g class="bob" style="animation-delay:-.2s"><use href="#kid" x="340" y="515" width="44" height="82" style="color:#b36acb;--hat:#f7c95c;--skin:#f3c8a4"/></g>
-       <g class="bob" style="animation-delay:-.8s"><use href="#kid" x="780" y="515" width="44" height="82" style="color:#e85d75;--hat:#2a9d6f;--skin:#9b6749"/></g>
-       <g class="bob" style="animation-delay:-.4s"><use href="#kid" x="830" y="520" width="46" height="86" style="color:#4b91ce;--hat:#ffd166;--skin:#f0c39a"/></g>
-       <g class="bob" style="animation-delay:-.9s"><use href="#kid" x="1015" y="510" width="45" height="84" style="color:#2a9d6f;--hat:#e63946;--skin:#c68642"/></g>
-       <g class="bob" style="animation-delay:-.3s"><use href="#kid" x="1060" y="520" width="43" height="80" style="color:#ffd166;--hat:#4895ef;--skin:#f1c27d"/></g>
-       <g class="bob" style="animation-delay:-1.2s"><use href="#kid" x="160" y="535" width="42" height="78" style="color:#4895ef;--hat:#2a9d6f;--skin:#f1c27d"/></g>
-       <!-- little speech bubbles to suggest cheerful conversations -->
-       <g fill="#fff" opacity=".92"><rect x="102" y="455" width="43" height="22" rx="10"/><path d="M117 475l-3 9 11-8" fill="#fff"/><circle cx="115" cy="466" r="2" fill="#8a6b8e"/><circle cx="123" cy="466" r="2" fill="#8a6b8e"/><circle cx="131" cy="466" r="2" fill="#8a6b8e"/>
-        <rect x="1000" y="470" width="43" height="22" rx="10"/><path d="M1025 490l3 9-11-8" fill="#fff"/><circle cx="1013" cy="481" r="2" fill="#8a6b8e"/><circle cx="1021" cy="481" r="2" fill="#8a6b8e"/><circle cx="1029" cy="481" r="2" fill="#8a6b8e"/></g>
-      </g>
-      <!-- overhead festive light strings -->
-      <g id="villageLights" fill="none" stroke-linecap="round">
-       <path d="M35 310 Q300 390 575 310 T1135 305" stroke="#273d50" stroke-width="5"/>
-       <path d="M35 310 Q300 390 575 310 T1135 305" stroke="#e5c98e" stroke-width="1.5" stroke-dasharray="2 12"/>
-       <g class="bulb" stroke="none" filter="drop-shadow(0 0 9px #ffd166)">
-        <circle cx="80" cy="326" r="7" fill="#ffd166"/><circle cx="155" cy="345" r="7" fill="#ff718a"/><circle cx="235" cy="360" r="7" fill="#8de8ff"/><circle cx="315" cy="363" r="7" fill="#ffd166"/><circle cx="395" cy="350" r="7" fill="#ff718a"/><circle cx="475" cy="330" r="7" fill="#8de8ff"/><circle cx="555" cy="313" r="7" fill="#ffd166"/><circle cx="650" cy="310" r="7" fill="#ff718a"/><circle cx="745" cy="309" r="7" fill="#8de8ff"/><circle cx="840" cy="308" r="7" fill="#ffd166"/><circle cx="935" cy="307" r="7" fill="#ff718a"/><circle cx="1030" cy="306" r="7" fill="#8de8ff"/><circle cx="1115" cy="305" r="7" fill="#ffd166"/>
-       </g>
-      </g>
-      <g id="villageSnow" fill="#fff" opacity=".85"></g>
-      <!-- Aurora ribbons and a richer dreamy night sky -->
-      <g id="aurora" opacity=".38" filter="url(#auroraBlur)">
-       <path d="M-80 150 Q190 -5 430 115 T920 70 T1290 120" fill="none" stroke="#65f2d0" stroke-width="38"/>
-       <path d="M-80 185 Q180 25 470 145 T930 100 T1290 150" fill="none" stroke="#8b9dff" stroke-width="22"/>
-       <path d="M80 205 Q310 70 560 175 T1040 125" fill="none" stroke="#e6a8ff" stroke-width="11"/>
-      </g>
-      <!-- distant alpine homes, lit from within -->
-      <g id="distantHomes" opacity=".9">
-       <g transform="translate(370 365) scale(.55)"><path d="M0 80L90 8 180 80Z" fill="#34456f"/><path d="M-8 82Q90 65 188 82L180 96H0Z" fill="#fff"/><rect x="18" y="78" width="144" height="92" fill="#73506b"/><rect x="35" y="100" width="35" height="40" fill="#ffd98a" stroke="#fff" stroke-width="4"/><rect x="110" y="100" width="35" height="40" fill="#ffd98a" stroke="#fff" stroke-width="4"/><rect x="80" y="125" width="25" height="45" fill="#382d4e"/></g>
-       <g transform="translate(530 390) scale(.43)"><path d="M0 80L90 8 180 80Z" fill="#354b78"/><path d="M-8 82Q90 65 188 82L180 96H0Z" fill="#fff"/><rect x="18" y="78" width="144" height="92" fill="#8a4e45"/><rect x="35" y="100" width="35" height="40" fill="#ffe1a0" stroke="#fff" stroke-width="4"/><rect x="110" y="100" width="35" height="40" fill="#ffe1a0" stroke="#fff" stroke-width="4"/></g>
-       <g transform="translate(1090 360) scale(.48)"><path d="M0 80L90 8 180 80Z" fill="#34456f"/><path d="M-8 82Q90 65 188 82L180 96H0Z" fill="#fff"/><rect x="18" y="78" width="144" height="92" fill="#76516b"/><rect x="35" y="100" width="35" height="40" fill="#ffd98a" stroke="#fff" stroke-width="4"/><rect x="110" y="100" width="35" height="40" fill="#ffd98a" stroke="#fff" stroke-width="4"/></g>
-      </g>
-      <!-- a winding snowy lane leading into the village -->
-      <path d="M515 700 Q570 620 520 575 Q470 530 540 490 Q630 445 610 400" fill="none" stroke="#fff" stroke-width="62" opacity=".45" stroke-linecap="round"/>
-      <path d="M515 700 Q570 620 520 575 Q470 530 540 490 Q630 445 610 400" fill="none" stroke="#dce8ff" stroke-width="42" opacity=".62" stroke-linecap="round"/>
-      <g id="footprints" fill="#a8bce9" opacity=".55"><ellipse cx="495" cy="665" rx="3" ry="7" transform="rotate(-22 495 665)"/><ellipse cx="526" cy="642" rx="3" ry="7" transform="rotate(18 526 642)"/><ellipse cx="507" cy="618" rx="3" ry="7"/><ellipse cx="532" cy="593" rx="3" ry="7"/><ellipse cx="508" cy="568" rx="3" ry="7"/></g>
-      <!-- Extra villagers strolling, greeting neighbours and carrying parcels -->
-      <g id="villageWalkers">
-       <g class="walker" style="--delay:-1s"><use href="#kid" x="445" y="515" width="42" height="78" style="color:#d85b70;--hat:#ffd166;--skin:#e6b58e"/></g>
-       <g class="walker" style="--delay:-2.4s"><use href="#kid" x="485" y="525" width="40" height="74" style="color:#4d91c9;--hat:#fff;--skin:#a96f51"/></g>
-       <g class="walker" style="--delay:-.5s"><use href="#kid" x="615" y="520" width="43" height="80" style="color:#3c9b79;--hat:#e85d75;--skin:#f1c7a2"/></g>
-       <g class="walker" style="--delay:-1.8s"><use href="#kid" x="675" y="535" width="41" height="76" style="color:#b16ac7;--hat:#ffd166;--skin:#8d5524"/></g>
-       <g class="walker" style="--delay:-.9s"><use href="#kid" x="900" y="535" width="42" height="78" style="color:#e0a33a;--hat:#4d91c9;--skin:#e6b58e"/></g>
-       <g class="walker" style="--delay:-2.1s"><use href="#kid" x="950" y="535" width="42" height="78" style="color:#3c9b79;--hat:#e85d75;--skin:#9b6749"/></g>
-       <g class="walker" style="--delay:-1.4s"><use href="#kid" x="1120" y="530" width="40" height="74" style="color:#d85b70;--hat:#ffd166;--skin:#f1c7a2"/></g>
-      </g>
-      <!-- festive lamp posts with warm pools of light -->
-      <g id="lampPosts">
-       <g transform="translate(395 445)"><circle cx="0" cy="0" r="54" fill="url(#lampGlow)" opacity=".55"/><path d="M0 12V150" stroke="#27364f" stroke-width="8"/><path d="M-20 12H20L15 -18H-15Z" fill="#27364f" stroke="#e8c78b" stroke-width="3"/><rect x="-11" y="-12" width="22" height="23" rx="7" fill="#ffe6a3" filter="url(#lampBlur)"/><path d="M-25 150H25" stroke="#27364f" stroke-width="7" stroke-linecap="round"/></g>
-       <g transform="translate(875 440)"><circle cx="0" cy="0" r="58" fill="url(#lampGlow)" opacity=".6"/><path d="M0 12V158" stroke="#27364f" stroke-width="8"/><path d="M-20 12H20L15 -18H-15Z" fill="#27364f" stroke="#e8c78b" stroke-width="3"/><rect x="-11" y="-12" width="22" height="23" rx="7" fill="#ffe6a3" filter="url(#lampBlur)"/><path d="M-25 158H25" stroke="#27364f" stroke-width="7" stroke-linecap="round"/></g>
-      </g>
-      <!-- twinkling foreground sparkle -->
-      <g id="villageSparkles" fill="#fff4d0">
-       <path d="M175 405v14m-7-7h14" stroke="#fff4d0" stroke-width="2" opacity=".8"><animate attributeName="opacity" values=".15;1;.15" dur="2.8s" repeatCount="indefinite"/></path>
-       <path d="M760 375v12m-6-6h12" stroke="#fff4d0" stroke-width="2"><animate attributeName="opacity" values=".2;1;.2" dur="3.4s" repeatCount="indefinite"/></path>
-       <path d="M1080 250v14m-7-7h14" stroke="#fff4d0" stroke-width="2"><animate attributeName="opacity" values=".1;1;.1" dur="2.4s" repeatCount="indefinite"/></path>
-      </g>
       <!-- snowman -->
       <g>
        <circle cx="300" cy="565" r="38" fill="#fff"/><circle cx="300" cy="508" r="28" fill="#fff"/><circle cx="300" cy="462" r="20" fill="#fff"/>
@@ -877,16 +868,11 @@ const rnd=(a,b)=>a+Math.random()*(b-a);
 let toastT;function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toastT);toastT=setTimeout(()=>e.classList.remove('show'),3200)}
 function pop(x,y,chars=['❄️','⭐','🎄','🎁','✨','❤️']){for(let i=0;i<12;i++){const p=document.createElement('span');p.className='pp';p.textContent=chars[i%chars.length];p.style.left=x+'px';p.style.top=y+'px';const a=rnd(0,6.28),d=rnd(50,140);p.style.setProperty('--dx',Math.cos(a)*d+'px');p.style.setProperty('--dy',(Math.sin(a)*d-60)+'px');p.style.setProperty('--r',rnd(-180,180)+'deg');document.body.appendChild(p);setTimeout(()=>p.remove(),1300)}}
 
-/* snow — capped frame rate, pauses in background tabs */
+/* snow */
 let snowOn=true;
-(function(){const c=$('#snow'),x=c.getContext('2d',{alpha:true});let w,h,raf=0,last=0,visible=!document.hidden;const f=[];
- function rs(){w=c.width=innerWidth;h=c.height=innerHeight;}rs();addEventListener('resize',rs,{passive:true});
- const N=Math.min(105,Math.floor(innerWidth/11));for(let i=0;i<N;i++)f.push({x:rnd(0,innerWidth),y:rnd(0,innerHeight),r:rnd(.7,2.7),s:rnd(.4,1.15),a:rnd(0,6.28),d:rnd(.005,.022)});
- function tick(t){raf=0;if(!visible)return;if(t-last<32){raf=requestAnimationFrame(tick);return}last=t;x.clearRect(0,0,w,h);if(snowOn){x.fillStyle='rgba(255,255,255,.85)';x.beginPath();for(const p of f){p.a+=p.d;p.x+=Math.sin(p.a)*.55;p.y+=p.s+p.r*.23;if(p.y>h+5){p.y=-5;p.x=rnd(0,w)}x.moveTo(p.x+p.r,p.y);x.arc(p.x,p.y,p.r,0,6.283)}x.fill()}raf=requestAnimationFrame(tick)}
- function start(){if(visible&&!raf)raf=requestAnimationFrame(tick)}
- document.addEventListener('visibilitychange',()=>{visible=!document.hidden;if(visible){last=0;start()}else{if(raf)cancelAnimationFrame(raf);raf=0;x.clearRect(0,0,w,h)}});
- start();
-})();
+(function(){const c=$('#snow'),x=c.getContext('2d');let w,h;const f=[];function rs(){w=c.width=innerWidth;h=c.height=innerHeight}rs();addEventListener('resize',rs);
+ const N=Math.min(170,Math.floor(innerWidth/7));for(let i=0;i<N;i++)f.push({x:rnd(0,innerWidth),y:rnd(0,innerHeight),r:rnd(.7,3),s:rnd(.4,1.3),a:rnd(0,6.28),d:rnd(.005,.025)});
+ function tick(){x.clearRect(0,0,w,h);if(snowOn){x.fillStyle='rgba(255,255,255,.85)';x.beginPath();for(const p of f){p.a+=p.d;p.x+=Math.sin(p.a)*.6;p.y+=p.s+p.r*.25;if(p.y>h+5){p.y=-5;p.x=rnd(0,w)}x.moveTo(p.x+p.r,p.y);x.arc(p.x,p.y,p.r,0,6.283)}x.fill()}requestAnimationFrame(tick)}tick()})();
 $('#snowBtn').onclick=e=>{snowOn=!snowOn;e.currentTarget.setAttribute('aria-pressed',snowOn)};
 
 /* stars */
@@ -904,10 +890,6 @@ function decorTree(g,x0,y0,sc){const pts=[[50,40],[38,64],[62,70],[26,98],[52,10
  decorTree($('#roomDecor'),40,150,2.7);
  /* garland */
  const gg=$('#garland');let k=0;[[0,333],[333,666],[666,1000]].forEach(([a,b])=>{const p0=[a,26],p1=[(a+b)/2,100],p2=[b,26];let d='M'+p0+' Q'+p1+' '+p2;svgEl('path',{d,fill:'none',stroke:'#1f7a4f','stroke-width':9,'stroke-linecap':'round'},gg);for(let t=.06;t<1;t+=.1){const [x,y]=bez(p0,p1,p2,t);svgEl('circle',{cx:x,cy:y+8,r:4.5,fill:COL[k%5],class:'bulb',style:`animation-delay:${(k*.21)%1.6}s;filter:drop-shadow(0 0 4px ${COL[k%5]})`},gg);k++}});
- /* village snowfall: soft layered flakes inside the scene */
- const vs=$('#villageSnow');for(let i=0;i<115;i++){const c=svgEl('circle',{cx:rnd(0,1200),cy:rnd(0,700),r:rnd(.8,2.5),opacity:rnd(.35,.9),style:`animation-delay:${-rnd(0,7)}s;animation-duration:${rnd(5,11)}s`},vs)}
- /* soft lantern glows near the stalls */
- [[130,480],[260,475],[735,490],[875,470],[930,455]].forEach(([x,y],i)=>svgEl('circle',{cx:x,cy:y,r:58,fill:'url(#lampGlow)',opacity:.28,class:'glow',style:`animation-delay:${i*.35}s`},vs));
  /* window snow */
  const ws=$('#wSnow');for(let i=0;i<26;i++)svgEl('circle',{cx:rnd(748,926),cy:rnd(66,160),r:rnd(1.2,2.8),class:'wsnow',style:`animation-delay:${-rnd(0,5)}s;animation-duration:${rnd(3,6)}s`},ws);
  /* stockings */
@@ -920,7 +902,7 @@ function decorTree(g,x0,y0,sc){const pts=[[50,40],[38,64],[62,70],[26,98],[52,10
 /* ============ parallax / scroll ============ */
 (function(){const layers=$$('[data-speed]'),decos=$$('[data-px]'),bar=$('#progress');let sy=0,mx=0,my=0,tick=false;
  function upd(){tick=false;sy=scrollY;bar.style.width=(sy/(document.documentElement.scrollHeight-innerHeight)*100)+'%';
-  if(sy<innerHeight*1.3)layers.forEach(l=>{const sp=+l.dataset.speed,d=+(l.dataset.depth||0);l.style.transform=`translate3d(${(-mx*d*50).toFixed(1)}px,${(sy*sp-my*d*24).toFixed(1)}px,0)`+(l.classList.contains('layer')?` scale(${(window.__cam||1).toFixed(4)})`:'')});
+  if(sy<$('.hero').offsetHeight+200)layers.forEach(l=>{const sp=+l.dataset.speed,d=+(l.dataset.depth||0);l.style.transform=`translate3d(${(-mx*d*50).toFixed(1)}px,${(sy*sp-my*d*24).toFixed(1)}px,0)`+(l.classList.contains('layer')?` scale(${((window.__cam||1)*(window.__dolly||1)).toFixed(4)})`:'')});
   decos.forEach(d=>{const r=d.parentElement.getBoundingClientRect();if(r.bottom<-200||r.top>innerHeight+200)return;const c=r.top+r.height/2-innerHeight/2;d.style.transform=`translateY(${(-c*+d.dataset.px).toFixed(1)}px) rotate(${(c*.02).toFixed(1)}deg)`})}
  const req=()=>{if(!tick){tick=true;requestAnimationFrame(upd)}};
  addEventListener('scroll',req,{passive:true});addEventListener('resize',req);
@@ -1011,50 +993,13 @@ let lbIdx=0,lbZ;
 /* plans */
 $$('[data-sub]').forEach(b=>b.addEventListener('click',e=>{toast('🎉 Subscribed to '+b.dataset.sub+'! No credit card, just good vibes.');pop(e.clientX,e.clientY)}));
 
-/* ============ music: Wham! — Last Christmas (audio-only Spotify player) ============ */
-(function(){
- let playing=false, player=null;
- const btn=$('#musicBtn');
- function stop(){
-  if(player){player.remove();player=null}
-  playing=false;btn.setAttribute('aria-pressed','false');btn.textContent='🎵 Play Last Christmas';
- }
- function start(){
-  if(player)player.remove();
-  player=document.createElement('section');
-  player.id='lastChristmasPlayer';
-  player.setAttribute('aria-label','Wham! Last Christmas audio player');
-  player.style.cssText='position:fixed;right:18px;bottom:18px;width:min(360px,calc(100vw - 28px));z-index:100000;background:rgba(17,29,43,.97);color:#fff;border:1px solid rgba(255,255,255,.32);border-radius:18px;overflow:hidden;box-shadow:0 14px 48px rgba(0,0,0,.42);font:600 13px system-ui';
-  const top=document.createElement('div');
-  top.style.cssText='display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 13px';
-  const label=document.createElement('span');label.textContent='🎄 NOW PLAYING · WHAM!';label.style.cssText='letter-spacing:.08em;font-size:11px';
-  const close=document.createElement('button');close.type='button';close.textContent='✕';close.setAttribute('aria-label','Close music player');close.style.cssText='border:0;background:transparent;color:white;font-size:20px;cursor:pointer;padding:2px 7px';
-  close.onclick=stop;top.append(label,close);
-  const song=document.createElement('div');
-  song.style.cssText='display:flex;align-items:center;gap:12px;padding:0 13px 10px';
-  const art=document.createElement('div');
-  art.textContent='❄️';art.style.cssText='width:48px;height:48px;flex:0 0 48px;border-radius:9px;background:linear-gradient(135deg,#b51f38,#183d58);display:grid;place-items:center;font-size:25px';
-  const meta=document.createElement('div');
-  const title=document.createElement('div');title.textContent='Last Christmas';title.style.cssText='font-size:15px;font-weight:750';
-  const artist=document.createElement('div');artist.textContent='Wham! · 1984';artist.style.cssText='font-size:12px;opacity:.72;margin-top:3px';
-  meta.append(title,artist);song.append(art,meta);
-  const frame=document.createElement('iframe');
-  frame.title='Listen to Last Christmas by Wham! on Spotify';
-  frame.src='https://open.spotify.com/embed/track/2FRnf9qhLbvw8fu4IBXx78?utm_source=generator&theme=0&autoplay=1';
-  frame.width='100%';frame.height='152';frame.style.cssText='display:block;border:0;background:transparent';
-  frame.allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
-  frame.loading='eager';
-  frame.setAttribute('fetchpriority','high');
-  const fallback=document.createElement('a');
-  fallback.href='https://open.spotify.com/track/2FRnf9qhLbvw8fu4IBXx78';fallback.target='_blank';fallback.rel='noopener noreferrer';
-  fallback.textContent='Open song in Spotify ↗';
-  fallback.style.cssText='display:block;padding:9px 13px;color:#d8efff;text-decoration:none;font:600 12px system-ui;background:rgba(255,255,255,.06)';
-  player.append(top,song,frame,fallback);document.body.appendChild(player);
-  playing=true;btn.setAttribute('aria-pressed','true');btn.textContent='⏸ Close music player';
- }
- btn.textContent='🎵 Play Last Christmas';
- btn.onclick=()=>playing?stop():start();
-})();
+/* ============ music (We Wish You a Merry Christmas — public domain) ============ */
+(function(){const N={D4:293.66,E4:329.63,F4:369.99,G4:392,A4:440,B4:493.88,C5:523.25,D5:587.33,R:0};
+ const M=[['D4',1],['G4',1],['G4',.5],['A4',.5],['G4',.5],['F4',.5],['E4',1],['E4',1],['E4',1],['A4',1],['A4',.5],['B4',.5],['A4',.5],['G4',.5],['F4',1],['D4',1],['D4',1],['B4',1],['B4',.5],['C5',.5],['B4',.5],['A4',.5],['G4',1],['E4',1],['D4',.5],['D4',.5],['E4',1],['A4',1],['F4',1],['G4',2],['R',1],['D4',1]].map(([n,b])=>[N[n],b]);
+ let ctx,playing=false,i=0,t,beat=.4;
+ function note(f,d){const o=ctx.createOscillator(),g=ctx.createGain(),o2=ctx.createOscillator();o.type='triangle';o2.type='sine';o.frequency.value=f;o2.frequency.value=f*2;const g2=ctx.createGain();g2.gain.value=.25;o.connect(g);o2.connect(g2);g2.connect(g);g.connect(ctx.destination);const n=ctx.currentTime;g.gain.setValueAtTime(0,n);g.gain.linearRampToValueAtTime(.1,n+.02);g.gain.exponentialRampToValueAtTime(.001,n+d*.95);o.start(n);o2.start(n);o.stop(n+d);o2.stop(n+d)}
+ function step(){if(!playing)return;const[f,b]=M[i%M.length];if(f)note(f,b*beat);i++;t=setTimeout(step,b*beat*1000)}
+ $('#musicBtn').onclick=e=>{const b=e.currentTarget;if(!playing){ctx=ctx||new(window.AudioContext||window.webkitAudioContext)();ctx.resume();playing=true;step();toast('🎵 We wish you a Merry Christmas!')}else{playing=false;clearTimeout(t)}b.setAttribute('aria-pressed',playing)}})();
 
 /* ============ hero framed photo ============ */
 (function(){const img=$('#heroPhoto'),fr=$('#heroFrame'),bl=$('#frameBulbs');img.src=CLASS_PHOTO;
@@ -1069,16 +1014,17 @@ $$('[data-sub]').forEach(b=>b.addEventListener('click',e=>{toast('🎉 Subscribe
  window.__cam=1.2;window.__upd&&window.__upd();
  [...$('.hero-content').children].forEach((c,i)=>c.style.setProperty('--i',i));
 
- /* Film grain disabled to reduce constant canvas work. */
+ /* film grain: fine 1:1 noise tile, shifted in steps */
+ (function(){const c=document.createElement('canvas');c.width=c.height=220;const x=c.getContext('2d'),d=x.createImageData(220,220);for(let i=0;i<d.data.length;i+=4){const v=Math.random()*255;d.data[i]=d.data[i+1]=d.data[i+2]=v;d.data[i+3]=255}x.putImageData(d,0,0);$('#grain').style.backgroundImage='url('+c.toDataURL('image/png')+')'})();
 
  /* bokeh */
  const bk=$('#bokeh'),bc=['255,209,102','255,120,110','120,255,170','255,255,255','140,190,255'];
- for(let i=0;i<10;i++){const e=document.createElement('i'),s=rnd(24,100),c=bc[i%bc.length];
+ for(let i=0;i<18;i++){const e=document.createElement('i'),s=rnd(24,100),c=bc[i%bc.length];
   e.style.cssText=`left:${rnd(0,100)}%;top:${rnd(30,100)}%;width:${s}px;height:${s}px;background:radial-gradient(circle,rgba(${c},.85),rgba(${c},.18) 60%,transparent 72%);--o:${rnd(.18,.45).toFixed(2)};--dx:${rnd(-60,60).toFixed(0)}px;animation-duration:${rnd(9,18).toFixed(1)}s;animation-delay:${(-rnd(0,15)).toFixed(1)}s`;bk.appendChild(e)}
 
  /* timecode */
  const tc=$('#tc'),T0=performance.now(),p2=n=>String(n).padStart(2,'0');
- setInterval(()=>{const ms=performance.now()-T0,s=Math.floor(ms/1000);tc.textContent='00:'+p2(Math.floor(s/60)%60)+':'+p2(s%60)+':'+p2(Math.floor(ms%1000/1000*24))},250);
+ setInterval(()=>{const ms=performance.now()-T0,s=Math.floor(ms/1000);tc.textContent='00:'+p2(Math.floor(s/60)%60)+':'+p2(s%60)+':'+p2(Math.floor(ms%1000/1000*24))},80);
 
  /* subtitles */
  let sT;function subtitle(t,ms=4200){if(!t||body.classList.contains('cine-off'))return;sb.textContent=t;sb.classList.add('on');clearTimeout(sT);sT=setTimeout(()=>sb.classList.remove('on'),ms)}
@@ -1101,6 +1047,212 @@ $$('[data-sub]').forEach(b=>b.addEventListener('click',e=>{toast('🎉 Subscribe
 
  /* cinema toggle */
  $('#cineBtn').onclick=e=>{const off=body.classList.toggle('cine-off');e.currentTarget.setAttribute('aria-pressed',String(!off));toast(off?'🎞 Cinema effects off':'🎬 Cinema effects on')};
+})();
+
+/* ============ SCENES: scroll-linked transitions, snap assist, dots ============ */
+(function(){
+ const body=document.body,hero=$('.hero'),root=document.documentElement;
+ const chaps=$$('.chapter'),secs=chaps.map(c=>c.nextElementSibling),foot=$('footer');
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const sw=$('#sweep');
+ const labels=['Opening','The Village','By the Fire','Memories','Wishes','New Year','Finale'];
+ const dots=$('#dots'),dotEls=labels.map((l,i)=>{const b=document.createElement('button');b.dataset.l=l;b.setAttribute('aria-label',l);
+  b.onclick=()=>{const t=i===0?0:i===labels.length-1?foot.offsetTop:secs[i-1].offsetTop-chaps[i-1].offsetHeight;scrollTo({top:t,behavior:'smooth'})};dots.appendChild(b);return b});
+ let tick=false,prevKey=null,lastY=scrollY,dir=1,idle,lastDot=-1;
+
+ function frame(){tick=false;const vh=innerHeight,y=scrollY;let bars=0,key=null,heroU=0;
+  const tg=[0];
+  chaps.forEach((c,i)=>{const st=secs[i].offsetTop,ct=st-c.offsetHeight,u1=(y-(ct-vh))/vh,u2=(y-ct)/vh;tg.push(ct);
+   if(u1>0&&u1<1){bars=Math.max(bars,Math.sin(Math.PI*u1));key=i+'a'+(u1>=.5?1:0)}
+   if(i===0&&u1>0)heroU=Math.min(1,u1);
+   if(u2>0&&u2<1){bars=Math.max(bars,Math.sin(Math.PI*u2));key=i+'b'+(u2>=.5?1:0)}
+   c.style.setProperty('--c',Math.min(1,Math.max(0,u2)).toFixed(3));
+   const vis=(y>st+60)?'hidden':'visible';if(c.style.visibility!==vis)c.style.visibility=vis});
+  tg.push(foot.offsetTop);
+  /* letterbox squeeze + light sweep at each cut */
+  root.style.setProperty('--b',reduce?0:bars.toFixed(3));
+  if(key&&prevKey&&key!==prevKey&&key.slice(0,2)===prevKey.slice(0,2)&&!reduce){sw.classList.remove('go');void sw.offsetWidth;sw.classList.add('go')}
+  prevKey=key;
+  /* hero dolly-out + fade to black */
+  hero.style.setProperty('--u',heroU.toFixed(3));
+  const d=1+.3*heroU;if(window.__dolly!==d){window.__dolly=d;window.__upd&&window.__upd()}
+  /* dots */
+  let a=0;tg.forEach((t,i)=>{if(y+vh*.5>=t)a=i});
+  if(a!==lastDot){lastDot=a;dotEls.forEach((b,i)=>b.classList.toggle('on',i===a))}
+ }
+ function snap(){
+  if(window.__noSnap||reduce||body.classList.contains('intro')||body.classList.contains('cine-off')||body.style.overflow==='hidden')return;
+  const vh=innerHeight,y=scrollY;let t=null;
+  for(let i=0;i<chaps.length;i++){const st=secs[i].offsetTop,ct=st-chaps[i].offsetHeight,u1=(y-(ct-vh))/vh;
+   if(y>=ct&&y<st){const u=(y-ct)/(st-ct);t=dir>0?(u>.06?st:ct):(u<.94?ct:st);break}
+   if(u1>0&&y<ct){t=(dir>0?u1>.12:u1>.6)?ct:null;break}}
+  if(t!==null&&Math.abs(t-y)>2)scrollTo({top:t,behavior:'smooth'})}
+ addEventListener('scroll',()=>{const y=scrollY;if(y!==lastY){dir=y>lastY?1:-1;lastY=y}if(!tick){tick=true;requestAnimationFrame(frame)}clearTimeout(idle);idle=setTimeout(snap,160)},{passive:true});
+ addEventListener('resize',()=>requestAnimationFrame(frame));addEventListener('load',()=>requestAnimationFrame(frame));
+ frame();
+})();
+
+/* ============ 3D PARALLAX PROSPERITY VILLAGE ============ */
+(function(){
+ const journey=$('#journey'),stage=$('#jstage'),world=$('#jworld'),cam=$('#jcam');
+ if(!journey)return;
+ const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ const D=3000,GY=232,PERSP=800,G='#ffd166',NY=new Date().getFullYear()+1;
+ $('#nyYear').textContent=NY;
+ let seed=11;const R=()=>{seed=(seed*16807)%2147483647;return(seed-1)/2147483646};
+ const items=[];
+ const WALLS=['#b5533c','#3f6f9c','#8a5a9e','#2f7d5b','#c08a2e','#a8475d'],ROOFS=['#5b2a2a','#2a3f5f','#3b2a5b','#1f4a3a'];
+ const SHOPS=[['BAKERY','🥐🍞🎂'],['TOYS','🧸🚂🪁'],['GIFTS','🎁🎀🎄'],['CAFÉ','☕🍰🍪'],['SWEETS','🍬🍭🍫'],['BOOKS','📚✏️🎒']];
+
+ /* stars */
+ (function(){const s=$('#jstars');for(let i=0;i<110;i++){const d=document.createElement('i');d.className='star';const z=rnd(1,2.8);d.style.cssText=`left:${rnd(0,100)}%;top:${rnd(0,100)}%;width:${z}px;height:${z}px;animation-delay:${rnd(0,3)}s;animation-duration:${rnd(2,5)}s`;s.appendChild(d)}})();
+
+ /* ---- helpers ---- */
+ const gr=document.createElement('div');gr.className='ground';world.appendChild(gr);
+ function mk(html,o){const e=document.createElement('div');e.className='it'+(o.cls?' '+o.cls:'');e.style.width=o.w+'px';e.style.height=o.h+'px';e.style.transform=`translate3d(${(o.x-o.w/2).toFixed(1)}px,${o.y.toFixed(1)}px,${o.z.toFixed(1)}px) rotateY(${o.rot||0}deg)`;e.innerHTML=html;world.appendChild(e);const it={el:e,z:o.z,op:-1};items.push(it);return it}
+ function add(html,vw,vh,o){const h=o.w*vh/vw;return mk(html,{...o,h,y:GY-h-(o.lift||0)})}
+ function pool(x,z,s){const e=document.createElement('div');e.className='it pool';e.style.cssText=`width:${s}px;height:${s}px;transform:translate3d(${x-s/2}px,${GY-1-s/2}px,${z}px) rotateX(90deg)`;world.appendChild(e);items.push({el:e,z,op:-1})}
+ const bulb=(x,y,i,r=4)=>`<circle class="bulb" cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${r}" fill="${COL[i%5]}" style="animation-delay:${(i*.2)%1.6}s"/>`;
+
+ /* ---- builders ---- */
+ function house(wall,roof){let l='';for(let i=0;i<=8;i++){const t=i/8;l+=bulb(8+92*t,114-78*t,i,4.2)+bulb(192-92*t,114-78*t,i+2,4.2)}
+  return `<svg viewBox="0 0 200 232"><ellipse cx="100" cy="226" rx="94" ry="8" fill="#000" opacity=".3"/>
+  <rect x="150" y="34" width="22" height="64" fill="#7a3b2e"/><rect x="146" y="28" width="30" height="9" rx="2" fill="#fff"/>
+  <circle class="smoke" cx="161" cy="26" r="9" fill="#cfd8ee"/><circle class="smoke" cx="161" cy="26" r="9" fill="#cfd8ee" style="animation-delay:2s"/>
+  <rect x="20" y="104" width="160" height="122" fill="${wall}"/><rect x="20" y="212" width="160" height="14" fill="#000" opacity=".15"/>
+  <path d="M6 110 L100 30 L194 110Z" fill="${roof}"/>
+  <path d="M0 114 L100 24 L200 114 Q180 102 162 114 Q142 100 122 112 Q100 98 80 112 Q60 100 40 114 Q20 102 0 114Z" fill="#fff"/>${l}
+  <rect x="34" y="134" width="46" height="46" rx="3" fill="#ffd166" class="glow"/><path d="M57 134V180M34 157H80" stroke="#8a5a33" stroke-width="4"/>
+  <rect x="116" y="160" width="38" height="66" rx="4" fill="#5b3a29"/><circle cx="147" cy="196" r="3" fill="#ffd166"/>
+  <circle cx="135" cy="178" r="10" fill="none" stroke="#1f7a4f" stroke-width="5"/><circle cx="135" cy="168" r="3" fill="#e63946"/></svg>`}
+ function shop(label,goods,wall,awn){let aw='';const n=7,w=232/n;for(let i=0;i<n;i++){const x=14+i*w;aw+=`<path d="M${x.toFixed(1)} 96 H${(x+w).toFixed(1)} V118 Q${(x+w/2).toFixed(1)} 134 ${x.toFixed(1)} 118Z" fill="${i%2?'#fff':awn}"/>`}
+  return `<svg viewBox="0 0 260 244"><ellipse cx="130" cy="238" rx="122" ry="8" fill="#000" opacity=".3"/>
+  <rect x="14" y="62" width="232" height="176" fill="${wall}"/><rect x="14" y="226" width="232" height="12" fill="#000" opacity=".15"/>
+  <rect x="4" y="50" width="252" height="20" rx="6" fill="#4a2a2a"/>
+  <path d="M2 54 Q20 40 40 54 Q60 40 80 54 Q100 40 120 54 Q140 40 160 54 Q180 40 200 54 Q220 40 240 54 L258 54 V44 H2Z" fill="#fff"/>
+  <rect x="50" y="10" width="160" height="38" rx="6" fill="#2d160c" stroke="${G}" stroke-width="3"/>
+  <text x="130" y="36" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-weight="700" font-size="19" letter-spacing="3" fill="${G}">${label}</text>
+  ${aw}
+  <rect x="30" y="140" width="118" height="78" rx="4" fill="#ffe3a3" class="glow"/><rect x="30" y="140" width="118" height="78" rx="4" fill="none" stroke="#6b4423" stroke-width="5"/>
+  <text x="89" y="192" text-anchor="middle" font-size="30">${goods}</text>
+  <rect x="166" y="150" width="62" height="88" rx="4" fill="#5b3a29"/><circle cx="220" cy="198" r="3.5" fill="${G}"/>
+  <rect x="174" y="160" width="46" height="26" rx="3" fill="#ffe3a3" class="glow"/>
+  <rect x="172" y="136" width="50" height="14" rx="3" fill="#e63946"/><text x="197" y="147" text-anchor="middle" font-family="Inter,sans-serif" font-weight="800" font-size="9" fill="#fff">OPEN</text>
+  <path d="M14 118 V142 M246 118 V142" stroke="#222" stroke-width="1.5"/><circle class="glow" cx="14" cy="148" r="8" fill="#e63946"/><circle class="glow" cx="246" cy="148" r="8" fill="#e63946"/></svg>`}
+ const lamp=`<svg viewBox="0 0 60 260"><ellipse cx="30" cy="254" rx="16" ry="4" fill="#000" opacity=".3"/><rect x="27" y="42" width="6" height="212" fill="#2b2b3a"/><rect x="20" y="240" width="20" height="14" rx="2" fill="#2b2b3a"/>
+  <circle class="glow" cx="30" cy="28" r="28" fill="#ffd166" fill-opacity=".16"/><circle class="glow" cx="30" cy="28" r="16" fill="#ffd166" fill-opacity=".3"/>
+  <rect x="22" y="14" width="16" height="28" rx="3" fill="#ffd166" class="glow"/><path d="M18 16 L30 4 L42 16Z" fill="#2b2b3a"/><circle cx="30" cy="48" r="5" fill="#e63946"/></svg>`;
+ const use=(id,vw,vh,st)=>`<svg viewBox="0 0 ${vw} ${vh}"><use href="#${id}" width="${vw}" height="${vh}" style="${st||''}"/></svg>`;
+ const pine=`<svg viewBox="0 0 100 150"><use class="sway" href="#pine" width="100" height="150"/></svg>`;
+ const kid=(c,hat,skin)=>`<svg viewBox="0 0 60 110"><g class="bob" style="animation-delay:${(-R()).toFixed(2)}s"><use href="#kid" width="60" height="110" style="color:${c};--hat:${hat};--skin:${skin||'#ffd0a6'}"/></g></svg>`;
+ const gift=(c,r)=>use('gift',80,80,`color:${c};--rib:${r}`);
+ const snowman=`<svg viewBox="0 0 100 150"><ellipse cx="50" cy="146" rx="34" ry="4" fill="#000" opacity=".25"/><circle cx="50" cy="112" r="34" fill="#fff"/><circle cx="50" cy="66" r="25" fill="#fff"/><circle cx="50" cy="30" r="18" fill="#fff"/>
+  <path d="M26 62 L4 44 M74 62 L98 46" stroke="#5b3a29" stroke-width="4" stroke-linecap="round"/><circle cx="44" cy="26" r="2.4" fill="#111"/><circle cx="56" cy="26" r="2.4" fill="#111"/><path d="M50 31 L68 35 L50 37Z" fill="#ff8c1a"/>
+  <rect x="32" y="40" width="36" height="8" rx="4" fill="#e63946"/><rect x="36" y="-2" width="28" height="20" fill="#222"/><rect x="28" y="14" width="44" height="6" rx="3" fill="#222"/>
+  <circle cx="50" cy="66" r="3" fill="#222"/><circle cx="50" cy="80" r="3" fill="#222"/></svg>`;
+ const chest=`<svg viewBox="0 0 120 100"><ellipse cx="60" cy="96" rx="54" ry="5" fill="#000" opacity=".3"/>
+  <circle cx="42" cy="22" r="9" fill="#ffd166" stroke="#e0a526" stroke-width="2"/><circle cx="60" cy="14" r="9" fill="#ffd166" stroke="#e0a526" stroke-width="2"/><circle cx="78" cy="22" r="9" fill="#ffd166" stroke="#e0a526" stroke-width="2"/><circle cx="52" cy="26" r="9" fill="#ffe08a" stroke="#e0a526" stroke-width="2"/><circle cx="68" cy="26" r="9" fill="#ffe08a" stroke="#e0a526" stroke-width="2"/>
+  <rect x="10" y="48" width="100" height="46" rx="6" fill="#8a4b22"/><path d="M10 52 Q10 24 60 24 Q110 24 110 52Z" fill="#a35a2a"/>
+  <rect x="10" y="48" width="100" height="8" fill="#d9a43a"/><rect x="28" y="28" width="8" height="66" fill="#d9a43a"/><rect x="84" y="28" width="8" height="66" fill="#d9a43a"/>
+  <rect x="52" y="44" width="16" height="20" rx="3" fill="#ffd166" stroke="#8a5a1a" stroke-width="2"/><text class="tw" x="96" y="14" font-size="16">✨</text><text class="tw" x="8" y="26" font-size="14" style="animation-delay:1s">✨</text></svg>`;
+ function bigTree(){let b='';const pts=[[50,40],[38,64],[62,70],[26,98],[52,100],[76,102],[16,124],[44,120],[68,126],[86,124],[50,78],[34,86],[30,112],[60,112],[72,86],[22,118],[80,112]];
+  pts.forEach((q,i)=>b+=bulb(q[0],q[1],i,2.7));let sp=[];for(let i=0;i<10;i++){const r=i%2?3.6:8,a=-Math.PI/2+i*Math.PI/5;sp.push((50+Math.cos(a)*r).toFixed(1)+','+(7+Math.sin(a)*r).toFixed(1))}
+  return `<svg viewBox="-12 -12 124 174"><circle class="glow" cx="50" cy="72" r="54" fill="#ffd166" fill-opacity=".1"/><use href="#pine" width="100" height="150"/>${b}<circle class="bulb" cx="50" cy="7" r="13" fill="#ffd166" fill-opacity=".3"/><polygon points="${sp.join(' ')}" fill="#ffd166" stroke="#fff3b0" stroke-width="1"/></svg>`}
+ function arch(text){const L=[...text],n=L.length,cols=['#e63946','#2a9d6f','#ffd166','#4895ef'];let f='',lt='';
+  L.forEach((ch,i)=>{if(ch===' ')return;const t=(i+.5)/n,x=30+580*t,y=30+220*t*(1-t),c=cols[i%4];f+=`<path d="M${(x-19).toFixed(1)} ${y.toFixed(1)} H${(x+19).toFixed(1)} L${x.toFixed(1)} ${(y+46).toFixed(1)}Z" fill="${c}"/><text x="${x.toFixed(1)}" y="${(y+23).toFixed(1)}" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-weight="700" font-size="17" fill="${c==='#ffd166'?'#5a3a00':'#fff'}">${ch}</text>`});
+  for(let i=0;i<=16;i++){const t=i/16;lt+=bulb(30+580*t,30+220*t*(1-t)-6,i,3.4)}
+  return `<svg viewBox="0 0 640 200"><rect x="16" y="10" width="10" height="190" fill="#7a4b24"/><rect x="614" y="10" width="10" height="190" fill="#7a4b24"/><circle cx="21" cy="10" r="9" fill="${G}"/><circle cx="619" cy="10" r="9" fill="${G}"/><path d="M30 30 Q320 140 610 30" stroke="${G}" stroke-width="3" fill="none"/>${lt}${f}</svg>`}
+ function gate(){let lt='';for(let i=0;i<=20;i++){const t=i/20,x=760*t,y=118*(1-t)*(1-t)+72*t*(1-t)+118*t*t;lt+=bulb(x,y+10,i,4.5)}
+  return `<svg viewBox="0 0 760 440"><ellipse cx="380" cy="434" rx="360" ry="8" fill="#000" opacity=".3"/>
+  <rect x="24" y="110" width="64" height="320" fill="#a31621"/><rect x="672" y="110" width="64" height="320" fill="#a31621"/>
+  <rect x="14" y="98" width="84" height="22" rx="4" fill="${G}"/><rect x="662" y="98" width="84" height="22" rx="4" fill="${G}"/>
+  <rect x="14" y="404" width="84" height="26" fill="#6b1019"/><rect x="662" y="404" width="84" height="26" fill="#6b1019"/>
+  <path d="M0 90 Q380 0 760 90 L760 118 Q380 36 0 118Z" fill="#7a0f1a"/><path d="M0 90 Q380 0 760 90" stroke="${G}" stroke-width="6" fill="none"/>
+  <path d="M4 84 Q380 -6 756 84 Q700 60 640 66 Q560 40 500 46 Q440 20 380 24 Q320 20 260 46 Q200 40 120 66 Q60 60 4 84Z" fill="#fff"/>
+  ${lt}
+  <rect x="180" y="52" width="400" height="94" rx="10" fill="#2d160c" stroke="${G}" stroke-width="4"/>
+  <text x="380" y="98" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-weight="700" font-size="42" letter-spacing="8" fill="${G}">KELAS 98</text>
+  <text x="380" y="128" text-anchor="middle" font-family="Cinzel,Georgia,serif" font-weight="500" font-size="14" letter-spacing="5" fill="#ffe9b0">WINTER VILLAGE · PROSPERITY</text>
+  <path d="M120 112 V150 M640 112 V150" stroke="#222" stroke-width="2"/><circle class="glow" cx="120" cy="168" r="18" fill="#e63946"/><circle class="glow" cx="640" cy="168" r="18" fill="#e63946"/><rect x="112" y="148" width="16" height="6" fill="${G}"/><rect x="632" y="148" width="16" height="6" fill="${G}"/>
+  <text x="56" y="260" text-anchor="middle" font-size="26">🎄</text><text x="704" y="260" text-anchor="middle" font-size="26">🎄</text></svg>`}
+
+ /* ---- layout ---- */
+ add(gate(),760,440,{x:0,z:-250,w:760});
+ for(let i=0;i<10;i++){const z=-380-i*300;
+  [-1,1].forEach((s,j)=>{const rot=-s*24;
+   if((i+j)%2===0){const sh=SHOPS[(i*2+j)%SHOPS.length];add(shop(sh[0],sh[1],WALLS[(i+j*2)%6],(i+j)%4<2?'#e63946':'#2a9d6f'),260,244,{x:s*470,z,w:280,rot})}
+   else add(house(WALLS[(i*3+j)%6],ROOFS[(i+j)%4]),200,232,{x:s*445,z,w:230,rot})})}
+ for(let i=0;i<11;i++){const z=-210-i*300;[-1,1].forEach(s=>{add(lamp,60,260,{x:s*258,z,w:32});pool(s*232,z,250)});
+  [-1,1].forEach(s=>add(pine,100,150,{x:s*(430+R()*30),z:z-150,w:100+R()*40}))}
+ for(let i=0;i<16;i++){[-1,1].forEach(s=>add(pine,100,150,{x:s*(720+R()*320),z:-260-i*200-R()*80,w:130+R()*90}))}
+ add(arch('PROSPERITY'),640,200,{x:0,z:-860,w:640});
+ add(arch('HEALTH & JOY'),640,200,{x:0,z:-1760,w:640});
+ add(arch('HAPPY NEW YEAR'),640,200,{x:0,z:-2660,w:640});
+ add(snowman,100,150,{x:-150,z:-1000,w:90});add(snowman,100,150,{x:175,z:-2150,w:100});
+ [[-125,-1280,'#4895ef','#ffd166'],[-80,-1290,'#e63946','#2a9d6f'],[130,-1550,'#2a9d6f','#e63946'],[85,-1540,'#ffd166','#4895ef'],[-150,-2000,'#9d4edd','#ffd166'],[40,-2380,'#ff6b6b','#4895ef'],[-60,-2420,'#4895ef','#e63946'],[120,-2800,'#2a9d6f','#ffd166']].forEach((k,i)=>add(kid(k[2],k[3],['#ffd0a6','#c68642','#8d5524','#f1c27d'][i%4]),60,110,{x:k[0],z:k[1],w:54}));
+ [[-1,-1000],[1,-1700],[-1,-2400],[1,-3050]].forEach(c=>add(chest,120,100,{x:c[0]*300,z:c[1],w:110}));
+ const GC=[['#e63946','#ffd166'],['#4895ef','#fff'],['#2a9d6f','#ffd166'],['#9d4edd','#ffd166'],['#ffd166','#e63946']];
+ for(let i=0;i<16;i++){const s=i%2?1:-1;add(gift(...GC[i%5]),80,80,{x:s*(305+R()*40),z:-520-i*160-R()*60,w:44+R()*28})}
+ /* plaza */
+ add(bigTree(),124,174,{x:0,z:-3360,w:540});
+ for(let i=0;i<12;i++){const a=i/11,x=-330+660*a,gz=-3190-Math.sin(a*Math.PI)*70+R()*40;add(gift(...GC[i%5]),80,80,{x,z:gz,w:62+R()*36})}
+ add(gift('#ffd166','#e63946'),80,80,{x:-90,z:-3130,w:110});add(gift('#e63946','#ffd166'),80,80,{x:110,z:-3140,w:96});
+ add(use('santa',140,230),140,230,{x:-380,z:-3200,w:150});
+ add(kid('#e63946','#2a9d6f','#c68642'),60,110,{x:300,z:-3170,w:58});add(kid('#4895ef','#ffd166'),60,110,{x:360,z:-3190,w:54});
+ /* coins */
+ const coins=[];const NC=24;
+ for(let i=0;i<NC;i++){const z=-300-i*(2800/NC)-R()*40,x=(R()-.5)*340,lift=60+R()*95;
+  const it=mk(`<div class="cw"><div class="cn">★</div></div>`,{x,y:GY-lift-54,z,w:54,h:54,cls:'coin'});coins.push(it.el)}
+ $('#hudT').textContent=NC;
+ /* dust / fireflies */
+ for(let i=0;i<70;i++){const s=3+R()*6;mk(`<i class="dd" style="animation-delay:${(-R()*3).toFixed(2)}s"></i>`,{x:(R()-.5)*1500,y:-260+R()*480,z:-200-R()*3100,w:s,h:s,cls:'dust'})}
+
+ /* coin collecting */
+ let got=0;const hud=$('#jhud'),hn=$('#hudN');
+ coins.forEach(c=>c.addEventListener('click',e=>{if(c.classList.contains('got'))return;c.classList.add('got');got++;hn.textContent=got;hud.classList.remove('bump');void hud.offsetWidth;hud.classList.add('bump');pop(e.clientX,e.clientY,['🪙','✨','⭐']);
+  if(got===1)toast('🪙 +1 Prosperity! Collect them all as you walk.');if(got===NC)toast('🏆 Prosperity unlocked! You collected every coin. Happy New Year, '+CLASS_NAME+'!')}));
+
+ /* fireworks + coin shower */
+ const fc=$('#jfx'),fx=fc.getContext('2d');let W=0,Hh=0,parts=[],drops=[],lastB=0,lastD=0;
+ const FC=['255,209,102','255,90,90','120,255,170','140,200,255','255,150,220'];
+ function size(){W=fc.width=stage.clientWidth;Hh=fc.height=stage.clientHeight}
+ function burst(){const x=rnd(.12,.88)*W,y=rnd(.08,.38)*Hh,c=FC[Math.floor(Math.random()*5)];for(let i=0;i<52;i++){const a=i/52*6.283,s=rnd(1.5,5);parts.push({x,y,vx:Math.cos(a)*s,vy:Math.sin(a)*s,l:1,c})}}
+ function fxTick(ts,p){fx.clearRect(0,0,W,Hh);if(reduce||p<.68){parts.length=0;drops.length=0;return}
+  if(p>.8&&ts-lastB>800){burst();lastB=ts}
+  if(ts-lastD>90){drops.push({x:rnd(0,W),y:-20,vy:rnd(2,4.5),r:rnd(6,12),ph:rnd(0,6.28),w:rnd(.05,.12)});lastD=ts}
+  fx.globalCompositeOperation='lighter';
+  for(let i=parts.length-1;i>=0;i--){const q=parts[i];q.x+=q.vx;q.y+=q.vy;q.vy+=.05;q.vx*=.985;q.vy*=.985;q.l-=.011;if(q.l<=0){parts.splice(i,1);continue}fx.fillStyle=`rgba(${q.c},${q.l.toFixed(2)})`;fx.beginPath();fx.arc(q.x,q.y,2.2,0,6.283);fx.fill()}
+  fx.globalCompositeOperation='source-over';
+  for(let i=drops.length-1;i>=0;i--){const d=drops[i];d.y+=d.vy;d.ph+=d.w;if(d.y>Hh+20){drops.splice(i,1);continue}const sx=Math.abs(Math.cos(d.ph))*d.r;fx.fillStyle='#ffd166';fx.strokeStyle='#c98a14';fx.lineWidth=1.5;fx.beginPath();fx.ellipse(d.x,d.y,Math.max(1.5,sx),d.r,0,0,6.283);fx.fill();fx.stroke()}}
+
+ /* ---- main loop ---- */
+ const jmt=$('#jmt'),jsl=$('#jsleigh'),jgold=$('#jgold'),jprog=$('#jprog'),jhint=$('#jhint'),caps=$$('.jc');
+ let target=0,cur=0,active=false,raf=0,mx=0,my=0,tmx=0,tmy=0,capI=0;
+ const clamp=(v,a,b)=>Math.min(b,Math.max(a,v));
+ function measure(){const r=journey.getBoundingClientRect(),tot=journey.offsetHeight-innerHeight;target=clamp(-r.top/tot,0,1);active=r.bottom>-50&&r.top<innerHeight+50}
+ function render(ts){raf=0;
+  cur+=(target-cur)*(reduce?1:.11);if(Math.abs(target-cur)<.0002)cur=target;mx+=(tmx-mx)*.08;my+=(tmy-my)*.08;
+  const k=clamp(stage.clientWidth/1250,.5,1.15),Dc=PERSP/k,camZ=cur*D;
+  const sway=reduce?0:Math.sin(cur*9)*34,bobY=reduce?0:Math.sin(camZ/36)*3;
+  world.style.transform=`scale(${k.toFixed(3)}) translate3d(${(sway-mx*70).toFixed(1)}px,${bobY.toFixed(1)}px,${camZ.toFixed(1)}px)`;
+  cam.style.transform=`rotateX(${(-my*3).toFixed(2)}deg) rotateY(${(mx*5).toFixed(2)}deg)`;
+  for(let i=0;i<items.length;i++){const it=items[i],dz=it.z+camZ;
+   const near=clamp((.66*Dc-dz)/(.16*Dc),0,1),far=clamp((dz+3300)/1100,0,1),op=Math.min(near,far);
+   if(Math.abs(op-it.op)>.015||(op===0&&it.op!==0)){it.op=op;it.el.style.opacity=op.toFixed(2);it.el.style.visibility=op<.02?'hidden':'visible'}}
+  jmt.style.transform=`scale(${(1+cur*.4).toFixed(3)})`;
+  jsl.style.transform=`translate3d(${(-30+cur*135)*stage.clientWidth/100}px,${(Math.sin(cur*6)*18).toFixed(1)}px,0)`;
+  jgold.style.opacity=clamp((cur-.74)/.2,0,1).toFixed(2);
+  jprog.style.width=(cur*100).toFixed(1)+'%';jhint.classList.toggle('hide',cur>.025);
+  const ci=cur<.17?0:cur<.4?1:cur<.62?2:cur<.82?3:4;if(ci!==capI){capI=ci;caps.forEach((c,n)=>c.classList.toggle('on',n===ci))}
+  fxTick(ts||0,cur);
+  if(active&&(Math.abs(target-cur)>0||cur>.68||!reduce&&Math.abs(tmx-mx)>.001))raf=requestAnimationFrame(render)}
+ function kick(){measure();if(!raf&&(active||Math.abs(target-cur)>0))raf=requestAnimationFrame(render)}
+ addEventListener('scroll',kick,{passive:true});
+ addEventListener('resize',()=>{size();kick()});size();
+ stage.addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;const r=stage.getBoundingClientRect();tmx=(e.clientX-r.left)/r.width-.5;tmy=(e.clientY-r.top)/r.height-.5;kick()});
+ stage.addEventListener('pointerleave',()=>{tmx=tmy=0});
+ window.__villageKick=kick;
+ raf=requestAnimationFrame(t=>{measure();render(t)});
 })();
 </script>
 </body>
