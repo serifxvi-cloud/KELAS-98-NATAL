@@ -338,6 +338,29 @@ body.intro .hero-content{visibility:hidden;animation:unhide 0s linear 12s forwar
 @media(max-width:700px){.vf .spec,.vf .scn{display:none}.vf{inset:calc(6vh + 10px) 12px calc(6vh + 10px)}.lbx span{font-size:.5rem;letter-spacing:.2em}}
 @media(max-width:560px){.nav-actions .primary{display:none}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
+
+/* ===== PERFORMANCE + MOTION POLISH ===== */
+/* Keep motion on the compositor; avoid repeatedly rasterizing large blur layers. */
+#grain.fx{display:none!important;animation:none!important}
+.rv{filter:none!important;transform:translate3d(0,22px,0)!important;transition:opacity .85s ease,transform .85s cubic-bezier(.22,.75,.25,1)!important;will-change:opacity,transform}
+.rv.in{filter:none!important;transform:translate3d(0,0,0)!important}
+.chapter h3,.jc{filter:none!important}
+.chapter h3{transition:opacity 1.25s ease .15s,letter-spacing 1.6s cubic-bezier(.22,.75,.25,1) .15s,transform 1.6s ease .15s!important}
+.aurora{filter:blur(22px)!important;animation-duration:22s!important;will-change:transform,opacity}
+.fx.vig{opacity:.72}
+.nav,.badge,.cd,.jhud,.zc button{backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.btn,.wish,.plan,.ph,.zc button{transition-duration:.28s}
+.star,.bulb,.tw,.glow{animation-timing-function:ease-in-out}
+@media(max-width:760px){
+ .aurora{filter:blur(16px)!important}
+ .fx.grade,.fx.vig{opacity:.5}
+ .rv{transition-duration:.65s!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #grain.fx{display:none!important}
+ .rv,.rv.in{transform:none!important;filter:none!important}
+}
+
 </style>
 </head>
 <body class="intro">
@@ -879,14 +902,19 @@ function pop(x,y,chars=['❄️','⭐','🎄','🎁','✨','❤️']){for(let i=
 
 /* snow */
 let snowOn=true;
-(function(){const c=$('#snow'),x=c.getContext('2d');let w,h;const f=[];function rs(){w=c.width=innerWidth;h=c.height=innerHeight}rs();addEventListener('resize',rs);
- const N=Math.min(170,Math.floor(innerWidth/7));for(let i=0;i<N;i++)f.push({x:rnd(0,innerWidth),y:rnd(0,innerHeight),r:rnd(.7,3),s:rnd(.4,1.3),a:rnd(0,6.28),d:rnd(.005,.025)});
- function tick(){x.clearRect(0,0,w,h);if(snowOn){x.fillStyle='rgba(255,255,255,.85)';x.beginPath();for(const p of f){p.a+=p.d;p.x+=Math.sin(p.a)*.6;p.y+=p.s+p.r*.25;if(p.y>h+5){p.y=-5;p.x=rnd(0,w)}x.moveTo(p.x+p.r,p.y);x.arc(p.x,p.y,p.r,0,6.283)}x.fill()}requestAnimationFrame(tick)}tick()})();
-$('#snowBtn').onclick=e=>{snowOn=!snowOn;e.currentTarget.setAttribute('aria-pressed',snowOn)};
+(function(){const c=$('#snow'),x=c.getContext('2d',{alpha:true});let w,h,snowTimer=0;const f=[];
+ function rs(){w=c.width=innerWidth;h=c.height=innerHeight;f.length=0;const N=Math.min(92,Math.floor(innerWidth/11));for(let i=0;i<N;i++)f.push({x:rnd(0,w),y:rnd(0,h),r:rnd(.8,2.4),s:rnd(.45,1.05),a:rnd(0,6.28),d:rnd(.005,.018)})}
+ function stop(){if(snowTimer){clearTimeout(snowTimer);snowTimer=0}}
+ function tick(){snowTimer=0;if(!snowOn||document.hidden)return;x.clearRect(0,0,w,h);x.fillStyle='rgba(255,255,255,.82)';x.beginPath();for(const p of f){p.a+=p.d;p.x+=Math.sin(p.a)*.48;p.y+=p.s+p.r*.2;if(p.y>h+5){p.y=-5;p.x=rnd(0,w)}x.moveTo(p.x+p.r,p.y);x.arc(p.x,p.y,p.r,0,6.283)}x.fill();snowTimer=setTimeout(tick,34)}
+ function start(){if(snowOn&&!document.hidden&&!snowTimer)tick()}
+ rs();addEventListener('resize',rs,{passive:true});document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else start()});start();
+ window.__setSnow=on=>{snowOn=on;if(on)start();else{stop();x.clearRect(0,0,w,h)}};
+})();
+$('#snowBtn').onclick=e=>{snowOn=!snowOn;e.currentTarget.setAttribute('aria-pressed',snowOn);window.__setSnow(snowOn)};
 
 /* stars */
-(function(){const s=$('#stars');for(let i=0;i<130;i++){const d=document.createElement('i');d.className='star';const z=rnd(1,3);d.style.cssText=`left:${rnd(0,100)}%;top:${rnd(0,62)}%;width:${z}px;height:${z}px;animation-delay:${rnd(0,3)}s;animation-duration:${rnd(2,5)}s`;s.appendChild(d)}
- const g=$('#vStars');for(let i=0;i<60;i++)svgEl('circle',{cx:rnd(0,1200),cy:rnd(0,330),r:rnd(.8,2.2),fill:'#fff',class:'tw',style:`animation-delay:${rnd(0,3)}s`},g)})();
+(function(){const s=$('#stars');for(let i=0;i<92;i++){const d=document.createElement('i');d.className='star';const z=rnd(1,3);d.style.cssText=`left:${rnd(0,100)}%;top:${rnd(0,62)}%;width:${z}px;height:${z}px;animation-delay:${rnd(0,3)}s;animation-duration:${rnd(2,5)}s`;s.appendChild(d)}
+ const g=$('#vStars');for(let i=0;i<44;i++)svgEl('circle',{cx:rnd(0,1200),cy:rnd(0,330),r:rnd(.8,2.2),fill:'#fff',class:'tw',style:`animation-delay:${rnd(0,3)}s`},g)})();
 
 /* roof lights, big tree decor */
 function bez(p0,p1,p2,t){const u=1-t;return[u*u*p0[0]+2*u*t*p1[0]+t*t*p2[0],u*u*p0[1]+2*u*t*p1[1]+t*t*p2[1]]}
@@ -900,7 +928,7 @@ function decorTree(g,x0,y0,sc){const pts=[[50,40],[38,64],[62,70],[26,98],[52,10
  /* garland */
  const gg=$('#garland');let k=0;[[0,333],[333,666],[666,1000]].forEach(([a,b])=>{const p0=[a,26],p1=[(a+b)/2,100],p2=[b,26];let d='M'+p0+' Q'+p1+' '+p2;svgEl('path',{d,fill:'none',stroke:'#1f7a4f','stroke-width':9,'stroke-linecap':'round'},gg);for(let t=.06;t<1;t+=.1){const [x,y]=bez(p0,p1,p2,t);svgEl('circle',{cx:x,cy:y+8,r:4.5,fill:COL[k%5],class:'bulb',style:`animation-delay:${(k*.21)%1.6}s;filter:drop-shadow(0 0 4px ${COL[k%5]})`},gg);k++}});
  /* village snowfall: soft layered flakes inside the scene */
- const vs=$('#villageSnow');for(let i=0;i<115;i++){const c=svgEl('circle',{cx:rnd(0,1200),cy:rnd(0,700),r:rnd(.8,2.5),opacity:rnd(.35,.9),style:`animation-delay:${-rnd(0,7)}s;animation-duration:${rnd(5,11)}s`},vs)}
+ const vs=$('#villageSnow');for(let i=0;i<72;i++){const c=svgEl('circle',{cx:rnd(0,1200),cy:rnd(0,700),r:rnd(.8,2.5),opacity:rnd(.35,.9),style:`animation-delay:${-rnd(0,7)}s;animation-duration:${rnd(5,11)}s`},vs)}
  /* soft lantern glows near the stalls */
  [[130,480],[260,475],[735,490],[875,470],[930,455]].forEach(([x,y],i)=>svgEl('circle',{cx:x,cy:y,r:58,fill:'url(#lampGlow)',opacity:.28,class:'glow',style:`animation-delay:${i*.35}s`},vs));
  /* window snow */
@@ -1069,12 +1097,12 @@ $$('[data-sub]').forEach(b=>b.addEventListener('click',e=>{toast('🎉 Subscribe
 
  /* bokeh */
  const bk=$('#bokeh'),bc=['255,209,102','255,120,110','120,255,170','255,255,255','140,190,255'];
- for(let i=0;i<18;i++){const e=document.createElement('i'),s=rnd(24,100),c=bc[i%bc.length];
+ for(let i=0;i<10;i++){const e=document.createElement('i'),s=rnd(24,100),c=bc[i%bc.length];
   e.style.cssText=`left:${rnd(0,100)}%;top:${rnd(30,100)}%;width:${s}px;height:${s}px;background:radial-gradient(circle,rgba(${c},.85),rgba(${c},.18) 60%,transparent 72%);--o:${rnd(.18,.45).toFixed(2)};--dx:${rnd(-60,60).toFixed(0)}px;animation-duration:${rnd(9,18).toFixed(1)}s;animation-delay:${(-rnd(0,15)).toFixed(1)}s`;bk.appendChild(e)}
 
  /* timecode */
  const tc=$('#tc'),T0=performance.now(),p2=n=>String(n).padStart(2,'0');
- setInterval(()=>{const ms=performance.now()-T0,s=Math.floor(ms/1000);tc.textContent='00:'+p2(Math.floor(s/60)%60)+':'+p2(s%60)+':'+p2(Math.floor(ms%1000/1000*24))},80);
+ setInterval(()=>{const ms=performance.now()-T0,s=Math.floor(ms/1000);tc.textContent='00:'+p2(Math.floor(s/60)%60)+':'+p2(s%60)+':'+p2(Math.floor(ms%1000/1000*24))},250);
 
  /* subtitles */
  let sT;function subtitle(t,ms=4200){if(!t||body.classList.contains('cine-off'))return;sb.textContent=t;sb.classList.add('on');clearTimeout(sT);sT=setTimeout(()=>sb.classList.remove('on'),ms)}
