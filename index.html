@@ -387,6 +387,21 @@ body.intro #dots{display:none}
 .jprog{position:absolute;left:0;bottom:0;height:3px;width:0;z-index:9;background:linear-gradient(90deg,var(--red),var(--gold),var(--green))}
 @media(max-width:700px){.jhud{top:84px}.jc h3{font-size:2rem}}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}html{scroll-behavior:auto}}
+
+/* ===== Softer, lighter page transitions ===== */
+.rv{filter:none!important;transition:opacity .72s ease,transform .72s cubic-bezier(.22,.7,.25,1)!important}
+.rv.show{filter:none!important}
+.chapter h3{filter:none!important;transition:opacity 1s ease .15s,letter-spacing 1.25s cubic-bezier(.22,.7,.25,1) .15s,transform 1.25s ease .15s!important}
+.chapter small{transition:opacity .8s ease,transform .8s ease,letter-spacing 1.1s ease!important}
+.chapter p{transition:opacity .9s ease .35s!important}
+.chapter .ln{transition:width 1.15s ease .25s!important}
+.jc{filter:none!important;transition:opacity .65s ease,transform .65s cubic-bezier(.22,.7,.25,1)!important}
+.il{filter:none!important;transition:opacity 1s ease,transform 1.35s ease!important}
+.il b{transition:letter-spacing 1.4s ease!important}
+.nav nav a,.btn,.wish,.plan,.ph,#toast,#subs{transition-duration:.45s!important}
+#intro .half{transition-duration:1.35s!important}
+@media(prefers-reduced-motion:reduce){.rv,.chapter h3,.chapter small,.chapter p,.chapter .ln,.jc,.il,#intro .half{transition:none!important}}
+
 </style>
 </head>
 <body class="intro">
